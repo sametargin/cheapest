@@ -18,6 +18,14 @@ fetch('controller_prices_usd.json')
       const cheapest = product.prices.reduce((min, p) =>
         p.price_usd < min.price_usd ? p : min, product.prices[0]);
 
+      // Kartın tamamına tıklanınca detaylı fiyatları göster
+card.addEventListener('click', () => {
+  const fiyatlar = item.prices
+    .map(p => `• ${p.country}: ${p.price} ${p.currency} (${p.price_usd} USD)`)
+    .join('\n');
+
+  alert(`💡 ${item.name}\n\n🌍 Fiyatlar:\n${fiyatlar}`);
+});
       const card = document.createElement('div');
       card.className = 'product bg-white p-4 rounded-lg shadow';
 
@@ -33,14 +41,7 @@ document.getElementById('dark-toggle').addEventListener('click', () => {
   document.documentElement.classList.toggle('dark');
 });
 
-// Kartın tamamına tıklanınca detaylı fiyatları göster
-card.addEventListener('click', () => {
-  const fiyatlar = item.prices
-    .map(p => `• ${p.country}: ${p.price} ${p.currency} (${p.price_usd} USD)`)
-    .join('\n');
 
-  alert(`💡 ${item.name}\n\n🌍 Fiyatlar:\n${fiyatlar}`);
-});
 
       grid.appendChild(card);
     });
