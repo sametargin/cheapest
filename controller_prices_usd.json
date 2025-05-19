@@ -44,8 +44,6 @@
       { "country": "Türkiye", "price": 85, "currency": "TRY", "price_usd": 2.19 }
     ]
   },
-
-  // --- Mutfak Ürünleri ---
   {
     "name": "Philips Airfryer XXL",
     "image": "https://www.philips.com.tr/c-dam/b2c/category-pages/household/airfryer/airfryer-xxl.png",
@@ -82,8 +80,6 @@
       { "country": "Türkiye", "price": 2499, "currency": "TRY", "price_usd": 64 }
     ]
   },
-
-  // --- Ev Teknolojisi ---
   {
     "name": "Dyson V15 Detect Kablosuz Süpürge",
     "image": "https://dyson.com.tr/images/products/large/394472-01.png",
@@ -120,8 +116,6 @@
       { "country": "Türkiye", "price": 17999, "currency": "TRY", "price_usd": 461 }
     ]
   },
-
-  // --- Küçük Ev Aletleri ---
   {
     "name": "Fakir Kaave Türk Kahvesi Makinesi",
     "image": "https://cdn.fakir.com.tr/Uploads/UrunResimleri/buyuk/kaave-turk-kahvesi-makinesi-2b7e.jpg",
@@ -149,8 +143,6 @@
       { "country": "Türkiye", "price": 2499, "currency": "TRY", "price_usd": 64 }
     ]
   },
-
-  // --- Kişisel Bakım ---
   {
     "name": "Philips OneBlade Yüz ve Vücut",
     "image": "https://images.philips.com/is/image/PhilipsConsumer/QP2630_30-IMS-tr_TR?$jpglarge$&wid=1250",
@@ -178,8 +170,6 @@
       { "country": "Türkiye", "price": 899, "currency": "TRY", "price_usd": 23 }
     ]
   },
-
-  // --- Bilgisayar & Tablet ---
   {
     "name": "Apple MacBook Air M2",
     "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-m2-2022-hero?wid=2000&hei=1536&fmt=jpeg&qlt=95&.v=1653493200207",
@@ -188,8 +178,7 @@
       { "country": "Almanya", "price": 1299, "currency": "EUR", "price_usd": 1451 },
       { "country": "Türkiye", "price": 49999, "currency": "TRY", "price_usd": 1282 }
     ]
-  }
-]
+  },
   {
     "name": "Dell XPS 13",
     "image": "https://i.dell.com/is/image/DellContent/dell-xps-13-9310-laptop?wid=600&hei=400&fmt=png-alpha",
@@ -198,5 +187,14 @@
       { "country": "Almanya", "price": 1199, "currency": "EUR", "price_usd": 1335 },
       { "country": "Türkiye", "price": 39999, "currency": "TRY", "price_usd": 1038 }
     ]
+  },
+  {
+    "name": "Samsung Galaxy Tab S8",
+    "image": "https://images.samsung.com/is/image/samsung/p6pim/tr-galaxy-tab-s8-t730-sm-t730nzkextr/gallery/tr-galaxy-tab-s8-t730-sm-t730nzkextr-530205368?$720_576_PNG$",
+    "prices": [
+      { "country": "ABD", "price": 699, "currency": "USD", "price_usd": 699 },
+      { "country": "Almanya", "price": 799, "currency": "EUR", "price_usd": 889 },
+      { "country": "Türkiye", "price": 24999, "currency": "TRY", "price_usd": 641 }
+    ]
   }
-]     
+]
