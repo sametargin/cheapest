@@ -3,24 +3,45 @@
     "name": "DualSense Wireless Controller PS5",
     "image": "https://media.gamestop.com/i/gamestop/11106262_ALT05?$pdp$",
     "prices": [
-      {
-        "country": "ABD",
-        "price": 73.95,
-        "currency": "USD",
-        "price_usd": 73.95
-      },
-      {
-        "country": "Almanya",
-        "price": 61.34,
-        "currency": "EUR",
-        "price_usd": 68.48
-      },
-      {
-        "country": "Türkiye",
-        "price": 3469,
-        "currency": "TRY",
-        "price_usd": 89.3
-      }
+      { "country": "ABD", "price": 73.95, "currency": "USD", "price_usd": 73.95 },
+      { "country": "Almanya", "price": 61.34, "currency": "EUR", "price_usd": 68.48 },
+      { "country": "Türkiye", "price": 3469, "currency": "TRY", "price_usd": 89.3 }
+    ]
+  },
+  {
+    "name": "PlayStation 5",
+    "image": "https://m.media-amazon.com/images/I/619BkvKW35L._AC_SL1500_.jpg",
+    "prices": [
+      { "country": "ABD", "price": 499, "currency": "USD", "price_usd": 499 },
+      { "country": "Almanya", "price": 549, "currency": "EUR", "price_usd": 613 },
+      { "country": "Türkiye", "price": 23999, "currency": "TRY", "price_usd": 616 }
+    ]
+  },
+  {
+    "name": "iPhone 15 128GB",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-model-unselect-gallery-1-202309?wid=5120&hei=2880&fmt=jpeg&qlt=80&.v=1692923777972",
+    "prices": [
+      { "country": "ABD", "price": 799, "currency": "USD", "price_usd": 799 },
+      { "country": "Almanya", "price": 949, "currency": "EUR", "price_usd": 1060 },
+      { "country": "Türkiye", "price": 79999, "currency": "TRY", "price_usd": 2052 }
+    ]
+  },
+  {
+    "name": "Big Mac Menü",
+    "image": "https://cdn.getiryemek.com/products/1626189781577_500x375.jpeg",
+    "prices": [
+      { "country": "ABD", "price": 10.79, "currency": "USD", "price_usd": 10.79 },
+      { "country": "Almanya", "price": 9.49, "currency": "EUR", "price_usd": 10.59 },
+      { "country": "Türkiye", "price": 185, "currency": "TRY", "price_usd": 4.76 }
+    ]
+  },
+  {
+    "name": "Starbucks Grande Latte",
+    "image": "https://globalassets.starbucks.com/digitalassets/products/bev/SBX20190617_CaffeLatte.jpg",
+    "prices": [
+      { "country": "ABD", "price": 4.95, "currency": "USD", "price_usd": 4.95 },
+      { "country": "Almanya", "price": 4.79, "currency": "EUR", "price_usd": 5.35 },
+      { "country": "Türkiye", "price": 85, "currency": "TRY", "price_usd": 2.19 }
     ]
   }
 ]
