@@ -4,15 +4,7 @@ fetch('controller_prices_usd.json')
     const container = document.getElementById('product-container');
     container.innerHTML = '';
 
-    // Örnek bir kart ekle
-    data.push({
-      name: "Örnek Ürün",
-      image: "https://via.placeholder.com/150",
-      prices: [
-        { country: "TR", price: 100, currency: "TRY", price_usd: 3.1 },
-        { country: "US", price: 5, currency: "USD", price_usd: 5 }
-      ]
-    });
+    
 
     // En ucuz USD fiyatına göre sırala
     data.sort((a, b) => {
