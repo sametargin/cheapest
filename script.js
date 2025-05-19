@@ -1,42 +1,41 @@
 fetch('controller_prices_usd.json')
   .then(res => res.json())
   .then(data => {
-    const title = document.querySelector('h1');
+    const container = document.getElementById('product-container');
 
-    // Önceki ürün kartlarını sil
-    const oldCards = document.querySelectorAll('.product');
-    oldCards.forEach(el => el.remove());
+    // Önce eski kartları temizle
+    document.querySelectorAll('.product').forEach(el => el.remove());
 
-    // USD fiyatına göre sırala
-    data.sort((a, b) => a.price_usd - b.price_usd);
+    // En ucuz fiyatlara göre sırala (her ürünün en ucuzu baz alınır)
+    data.sort((a, b) => {
+      const minA = Math.min(...a.prices.map(p => p.price_usd));
+      const minB = Math.min(...b.prices.map(p => p.price_usd));
+      return minA - minB;
+    });
 
-    // Grid container
+    // Grid yapısı
     const grid = document.createElement('div');
     grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6';
 
     data.forEach(item => {
+      // En ucuz fiyatı bul
+      const cheapest = item.prices.reduce((min, p) => p.price_usd < min.price_usd ? p : min, item.prices[0]);
+
       const card = document.createElement('div');
       card.className = 'product bg-white rounded-xl shadow p-4 flex flex-col gap-2 w-full';
 
-      const imageURL = item.image || `https://via.placeholder.com/300x300?text=${encodeURIComponent(item.name)}`;
-      const shopURL = item.url || '#';
-
       card.innerHTML = `
-        <img src="${imageURL}" class="w-full rounded-md aspect-square object-cover" alt="Ürün görseli">
+        <img src="${item.image}" class="w-full rounded-md aspect-square object-cover" alt="${item.name}">
         <h2 class="text-xl font-bold text-gray-800">${item.name}</h2>
-        <p class="text-sm text-gray-600">Ülke: ${item.country}</p>
-        <p class="text-green-600 font-semibold text-lg">Fiyat: ${item.price} ${item.currency}</p>
-        <p class="text-gray-500 text-sm">USD karşılığı: ${item.price_usd ? item.price_usd + ' USD' : '—'}</p>
-        <a href="${shopURL}" target="_blank" class="mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center">
-          Mağazaya Git
-        </a>
+        <p class="text-sm text-gray-600">Ülke: ${cheapest.country}</p>
+        <p class="text-green-600 font-semibold text-lg">Fiyat: ${cheapest.price} ${cheapest.currency}</p>
+        <p class="text-gray-500 text-sm">USD karşılığı: ${cheapest.price_usd} USD</p>
       `;
 
       grid.appendChild(card);
     });
 
-    document.getElementById('product-container').appendChild(grid);
-
+    container.appendChild(grid);
   })
   .catch(err => {
     console.error("❌ JSON verisi okunamadı:", err);
