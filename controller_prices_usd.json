@@ -1,25 +1,26 @@
 [
   {
-    "country": "ABD",
-    "name": "PlayStation DualSense® Wireless Controller - White",
-    "price": 73.95,
-    "currency": "USD",
-    "price_usd": 73.95,
-    "image": "https://media.johnlewiscontent.com/i/JohnLewis/239052687alt1?fmt=auto&$background-off-white$"
-  },
-  {
-    "country": "Almanya",
-    "name": "DualSense Wireless-Controller [PlayStation 5 ]",
-    "price": 61.34,
-    "currency": "EUR",
-    "price_usd": 68.48,
-    "image": "https://media.johnlewiscontent.com/i/JohnLewis/239052687alt1?fmt=auto&$background-off-white$"
-  },
-  {
-    "country": "Türkiye",
-    "name": "DualSense kablosuz kumanda [Playstation 5 ]",
-    "price": 3469,
-    "currency": "TRY",
-    "price_usd": 89.3
+    "name": "DualSense Wireless Controller",
+    "image": "https://media.johnlewiscontent.com/i/JohnLewis/239052687alt1?fmt=auto&$background-off-white$",
+    "prices": [
+      {
+        "country": "ABD",
+        "price": 73.95,
+        "currency": "USD",
+        "price_usd": 73.95
+      },
+      {
+        "country": "Almanya",
+        "price": 61.34,
+        "currency": "EUR",
+        "price_usd": 68.48
+      },
+      {
+        "country": "Türkiye",
+        "price": 3469,
+        "currency": "TRY",
+        "price_usd": 89.3
+      }
+    ]
   }
 ]
