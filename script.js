@@ -7,7 +7,7 @@ fetch('controller_prices_usd.json')
     const oldCards = document.querySelectorAll('.product');
     oldCards.forEach(el => el.remove());
 
-    // USD fiyatlarına göre sırala
+    // USD fiyatına göre sırala
     data.sort((a, b) => a.price_usd - b.price_usd);
 
     // Grid container
@@ -24,4 +24,19 @@ fetch('controller_prices_usd.json')
       card.innerHTML = `
         <img src="${imageURL}" class="w-full rounded-md aspect-square object-cover" alt="Ürün görseli">
         <h2 class="text-xl font-bold text-gray-800">${item.name}</h2>
-        <
+        <p class="text-sm text-gray-600">Ülke: ${item.country}</p>
+        <p class="text-green-600 font-semibold text-lg">Fiyat: ${item.price} ${item.currency}</p>
+        <p class="text-gray-500 text-sm">USD karşılığı: ${item.price_usd ? item.price_usd + ' USD' : '—'}</p>
+        <a href="${shopURL}" target="_blank" class="mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center">
+          Mağazaya Git
+        </a>
+      `;
+
+      grid.appendChild(card);
+    });
+
+    title.after(grid);
+  })
+  .catch(err => {
+    console.error("❌ JSON verisi okunamadı:", err);
+  });
