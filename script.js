@@ -25,12 +25,13 @@ fetch('controller_prices_usd.json')
       card.className = 'product bg-white rounded-xl shadow p-4 flex flex-col gap-2 w-full';
 
       card.innerHTML = `
-        <img src="${item.image}" class="w-full rounded-md aspect-square object-cover" alt="${item.name}">
-        <h2 class="text-xl font-bold text-gray-800">${item.name}</h2>
-        <p class="text-sm text-gray-600">Ülke: ${cheapest.country}</p>
-        <p class="text-green-600 font-semibold text-lg">Fiyat: ${cheapest.price} ${cheapest.currency}</p>
-        <p class="text-gray-500 text-sm">USD karşılığı: ${cheapest.price_usd} USD</p>
-      `;
+  <img src="${item.image}" alt="${item.name}" class="w-full rounded-lg aspect-square object-cover">
+  <h2 class="text-xl font-bold text-gray-800 mt-2">${item.name}</h2>
+  <p class="text-sm text-gray-600">Ülke: ${cheapest.country}</p>
+  <p class="text-green-600 font-semibold">Fiyat: ${cheapest.price} ${cheapest.currency}</p>
+  <p class="text-gray-500 text-sm">USD karşılığı: ${cheapest.price_usd} USD</p>
+`;
+
 
       grid.appendChild(card);
     });
