@@ -35,7 +35,8 @@ fetch('controller_prices_usd.json')
       grid.appendChild(card);
     });
 
-    title.after(grid);
+    document.getElementById('product-container').appendChild(grid);
+
   })
   .catch(err => {
     console.error("❌ JSON verisi okunamadı:", err);
