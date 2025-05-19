@@ -43,5 +43,160 @@
       { "country": "Almanya", "price": 4.79, "currency": "EUR", "price_usd": 5.35 },
       { "country": "Türkiye", "price": 85, "currency": "TRY", "price_usd": 2.19 }
     ]
+  },
+
+  // --- Mutfak Ürünleri ---
+  {
+    "name": "Philips Airfryer XXL",
+    "image": "https://www.philips.com.tr/c-dam/b2c/category-pages/household/airfryer/airfryer-xxl.png",
+    "prices": [
+      { "country": "ABD", "price": 249.95, "currency": "USD", "price_usd": 249.95 },
+      { "country": "Almanya", "price": 229.99, "currency": "EUR", "price_usd": 257 },
+      { "country": "Türkiye", "price": 8999, "currency": "TRY", "price_usd": 230 }
+    ]
+  },
+  {
+    "name": "Arzum Okka Minio Türk Kahvesi Makinesi",
+    "image": "https://cdn.akakce.com/arzum/arzum-okka-minio-turk-kahvesi-makinesi-z.jpg",
+    "prices": [
+      { "country": "ABD", "price": 99.99, "currency": "USD", "price_usd": 99.99 },
+      { "country": "Almanya", "price": 89.99, "currency": "EUR", "price_usd": 100.5 },
+      { "country": "Türkiye", "price": 1999, "currency": "TRY", "price_usd": 51 }
+    ]
+  },
+  {
+    "name": "Bosch Kettle",
+    "image": "https://media3.bosch-home.com/Product_Shots/1600x900/MCSA01917913_TWK8611P_def.jpg",
+    "prices": [
+      { "country": "ABD", "price": 49.99, "currency": "USD", "price_usd": 49.99 },
+      { "country": "Almanya", "price": 44.99, "currency": "EUR", "price_usd": 50.2 },
+      { "country": "Türkiye", "price": 1299, "currency": "TRY", "price_usd": 33 }
+    ]
+  },
+  {
+    "name": "Tefal Ingenio Tava Seti",
+    "image": "https://tefalshop.com.tr/images/products/tefal-ingenio-tava-seti.jpg",
+    "prices": [
+      { "country": "ABD", "price": 89.99, "currency": "USD", "price_usd": 89.99 },
+      { "country": "Almanya", "price": 79.99, "currency": "EUR", "price_usd": 89.3 },
+      { "country": "Türkiye", "price": 2499, "currency": "TRY", "price_usd": 64 }
+    ]
+  },
+
+  // --- Ev Teknolojisi ---
+  {
+    "name": "Dyson V15 Detect Kablosuz Süpürge",
+    "image": "https://dyson.com.tr/images/products/large/394472-01.png",
+    "prices": [
+      { "country": "ABD", "price": 749.99, "currency": "USD", "price_usd": 749.99 },
+      { "country": "Almanya", "price": 699.99, "currency": "EUR", "price_usd": 782 },
+      { "country": "Türkiye", "price": 29999, "currency": "TRY", "price_usd": 769 }
+    ]
+  },
+  {
+    "name": "Xiaomi Mi Robot Vacuum Mop 2 Pro",
+    "image": "https://cdn.cimri.io/image/1000x1000/xiaomi-mi-robot-vacuum-mop-2-pro-robot-supurge_613257676.jpg",
+    "prices": [
+      { "country": "ABD", "price": 399.99, "currency": "USD", "price_usd": 399.99 },
+      { "country": "Almanya", "price": 369.99, "currency": "EUR", "price_usd": 413 },
+      { "country": "Türkiye", "price": 13999, "currency": "TRY", "price_usd": 359 }
+    ]
+  },
+  {
+    "name": "Philips 55'' 4K UHD TV",
+    "image": "https://images.philips.com/is/image/PhilipsConsumer/55PUS7906_12-IMS-tr_TR?$jpglarge$&wid=1250",
+    "prices": [
+      { "country": "ABD", "price": 599.99, "currency": "USD", "price_usd": 599.99 },
+      { "country": "Almanya", "price": 549.99, "currency": "EUR", "price_usd": 614 },
+      { "country": "Türkiye", "price": 24999, "currency": "TRY", "price_usd": 641 }
+    ]
+  },
+  {
+    "name": "Arçelik 9 Kg Çamaşır Makinesi",
+    "image": "https://cdn.arcelik.com.tr/ProductImages/2021/9/9kg-camasir-makinesi-9123-ycm-1.jpg",
+    "prices": [
+      { "country": "ABD", "price": 499.99, "currency": "USD", "price_usd": 499.99 },
+      { "country": "Almanya", "price": 459.99, "currency": "EUR", "price_usd": 514 },
+      { "country": "Türkiye", "price": 17999, "currency": "TRY", "price_usd": 461 }
+    ]
+  },
+
+  // --- Küçük Ev Aletleri ---
+  {
+    "name": "Fakir Kaave Türk Kahvesi Makinesi",
+    "image": "https://cdn.fakir.com.tr/Uploads/UrunResimleri/buyuk/kaave-turk-kahvesi-makinesi-2b7e.jpg",
+    "prices": [
+      { "country": "ABD", "price": 79.99, "currency": "USD", "price_usd": 79.99 },
+      { "country": "Almanya", "price": 69.99, "currency": "EUR", "price_usd": 78 },
+      { "country": "Türkiye", "price": 1499, "currency": "TRY", "price_usd": 38 }
+    ]
+  },
+  {
+    "name": "Arzum Blender Seti",
+    "image": "https://cdn.akakce.com/arzum/arzum-ar1032-mixset-blender-seti-z.jpg",
+    "prices": [
+      { "country": "ABD", "price": 59.99, "currency": "USD", "price_usd": 59.99 },
+      { "country": "Almanya", "price": 54.99, "currency": "EUR", "price_usd": 61 },
+      { "country": "Türkiye", "price": 999, "currency": "TRY", "price_usd": 25 }
+    ]
+  },
+  {
+    "name": "Tefal Toast Expert Tost Makinesi",
+    "image": "https://tefalshop.com.tr/images/products/tefal-toast-expert-tost-makinesi.jpg",
+    "prices": [
+      { "country": "ABD", "price": 89.99, "currency": "USD", "price_usd": 89.99 },
+      { "country": "Almanya", "price": 79.99, "currency": "EUR", "price_usd": 89.3 },
+      { "country": "Türkiye", "price": 2499, "currency": "TRY", "price_usd": 64 }
+    ]
+  },
+
+  // --- Kişisel Bakım ---
+  {
+    "name": "Philips OneBlade Yüz ve Vücut",
+    "image": "https://images.philips.com/is/image/PhilipsConsumer/QP2630_30-IMS-tr_TR?$jpglarge$&wid=1250",
+    "prices": [
+      { "country": "ABD", "price": 49.99, "currency": "USD", "price_usd": 49.99 },
+      { "country": "Almanya", "price": 44.99, "currency": "EUR", "price_usd": 50.2 },
+      { "country": "Türkiye", "price": 1299, "currency": "TRY", "price_usd": 33 }
+    ]
+  },
+  {
+    "name": "Braun Silk-épil 9",
+    "image": "https://m.media-amazon.com/images/I/61w8QwMCKlL._AC_SL1500_.jpg",
+    "prices": [
+      { "country": "ABD", "price": 119.99, "currency": "USD", "price_usd": 119.99 },
+      { "country": "Almanya", "price": 109.99, "currency": "EUR", "price_usd": 122.7 },
+      { "country": "Türkiye", "price": 3499, "currency": "TRY", "price_usd": 89 }
+    ]
+  },
+  {
+    "name": "Remington Saç Düzleştirici",
+    "image": "https://cdn.akakce.com/remington/remington-s5505-saç-duzlestirici-z.jpg",
+    "prices": [
+      { "country": "ABD", "price": 39.99, "currency": "USD", "price_usd": 39.99 },
+      { "country": "Almanya", "price": 34.99, "currency": "EUR", "price_usd": 39 },
+      { "country": "Türkiye", "price": 899, "currency": "TRY", "price_usd": 23 }
+    ]
+  },
+
+  // --- Bilgisayar & Tablet ---
+  {
+    "name": "Apple MacBook Air M2",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-m2-2022-hero?wid=2000&hei=1536&fmt=jpeg&qlt=95&.v=1653493200207",
+    "prices": [
+      { "country": "ABD", "price": 1099, "currency": "USD", "price_usd": 1099 },
+      { "country": "Almanya", "price": 1299, "currency": "EUR", "price_usd": 1451 },
+      { "country": "Türkiye", "price": 49999, "currency": "TRY", "price_usd": 1282 }
+    ]
   }
 ]
+  {
+    "name": "Dell XPS 13",
+    "image": "https://i.dell.com/is/image/DellContent/dell-xps-13-9310-laptop?wid=600&hei=400&fmt=png-alpha",
+    "prices": [
+      { "country": "ABD", "price": 999, "currency": "USD", "price_usd": 999 },
+      { "country": "Almanya", "price": 1199, "currency": "EUR", "price_usd": 1335 },
+      { "country": "Türkiye", "price": 39999, "currency": "TRY", "price_usd": 1038 }
+    ]
+  }
+]     
