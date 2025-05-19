@@ -1,0 +1,23 @@
+[
+  {
+    "country": "ABD",
+    "name": "PlayStation DualSense® Wireless Controller - White",
+    "price": 73.95,
+    "currency": "USD",
+    "price_usd": 73.95
+  },
+  {
+    "country": "Almanya",
+    "name": "DualSense Wireless-Controller [PlayStation 5 ]",
+    "price": 61.34,
+    "currency": "EUR",
+    "price_usd": 68.48
+  },
+  {
+    "country": "Türkiye",
+    "name": "DualSense kablosuz kumanda [Playstation 5 ]",
+    "price": 3469,
+    "currency": "TRY",
+    "price_usd": 89.3
+  }
+]
