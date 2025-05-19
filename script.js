@@ -28,6 +28,11 @@ fetch('controller_prices_usd.json')
         <p class="text-green-600 font-semibold">Fiyat: ${cheapest.price} ${cheapest.currency}</p>
         <p class="text-gray-400 text-sm">USD karşılığı: ${cheapest.price_usd} USD</p>
       `;
+      // Gece modu toggle
+document.getElementById('dark-toggle').addEventListener('click', () => {
+  document.documentElement.classList.toggle('dark');
+});
+
 // Kartın tamamına tıklanınca detaylı fiyatları göster
 card.addEventListener('click', () => {
   const fiyatlar = item.prices
