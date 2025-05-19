@@ -52,6 +52,49 @@ fetch('controller_prices_usd.json')
     console.error("❌ JSON verisi okunamadı:", err);
   });
 
+let allProductNames = [];
+fetch('controller_prices_usd.json')
+  .then(res => res.json())
+  .then(data => {
+    allProductNames = data.map(product => product.name);
+  });
+
+// Öneri kutusu için:
+const searchInput = document.getElementById('search-input');
+const suggestions = document.getElementById('suggestions');
+
+searchInput.addEventListener('input', function () {
+  const value = this.value.trim().toLowerCase();
+  suggestions.innerHTML = '';
+  if (!value) {
+    suggestions.classList.add('hidden');
+    return;
+  }
+  const filtered = allProductNames.filter(name => name.toLowerCase().includes(value));
+  if (filtered.length === 0) {
+    suggestions.classList.add('hidden');
+    return;
+  }
+  filtered.forEach(name => {
+    const li = document.createElement('li');
+    li.textContent = name;
+    li.className = 'px-4 py-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700';
+    li.addEventListener('click', () => {
+      searchInput.value = name;
+      suggestions.classList.add('hidden');
+    });
+    suggestions.appendChild(li);
+  });
+  suggestions.classList.remove('hidden');
+});
+
+// Input dışına tıklanınca öneri kutusunu kapat
+document.addEventListener('click', (e) => {
+  if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
+    suggestions.classList.add('hidden');
+  }
+});
+
 // Her zaman gece modu aktif
 document.documentElement.setAttribute('data-theme', 'dark');
 
