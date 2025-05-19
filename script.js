@@ -28,6 +28,14 @@ fetch('controller_prices_usd.json')
         <p class="text-green-600 font-semibold">Fiyat: ${cheapest.price} ${cheapest.currency}</p>
         <p class="text-gray-400 text-sm">USD karşılığı: ${cheapest.price_usd} USD</p>
       `;
+// Kartın tamamına tıklanınca detaylı fiyatları göster
+card.addEventListener('click', () => {
+  const fiyatlar = item.prices
+    .map(p => `• ${p.country}: ${p.price} ${p.currency} (${p.price_usd} USD)`)
+    .join('\n');
+
+  alert(`💡 ${item.name}\n\n🌍 Fiyatlar:\n${fiyatlar}`);
+});
 
       grid.appendChild(card);
     });
