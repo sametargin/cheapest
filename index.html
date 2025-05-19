@@ -2,20 +2,29 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Cheapest - Fiyat Karşılaştırma</title>
+  <title>Cheapest – Fiyat Karşılaştırma</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="p-8 bg-gray-100 font-sans">
+<!-- ✅ TEK body etiketi -->
+<body class="p-8 bg-gray-100 text-black font-sans dark:bg-gray-900 dark:text-white">
 
   <h1 class="text-3xl font-bold mb-4">📱 Popüler Ürünler</h1>
 
-  <div class="bg-white p-6 rounded-xl shadow-md mb-6 text-center">
+  <!-- 🌙 Gece Modu Toggle -->
+  <button id="dark-toggle" class="mb-4 px-4 py-2 rounded bg-gray-800 text-white dark:bg-yellow-400 dark:text-black">
+    🌙 Gece Modu
+  </button>
+
+  <!-- 🧊 Bilgi kutusu -->
+  <div class="bg-white p-6 rounded-xl shadow-md mb-6 text-center dark:bg-gray-800">
     <h2 class="text-2xl font-semibold">Cheapest</h2>
     <p class="text-green-600 text-lg">Where is it in the world?</p>
   </div>
 
+  <!-- 📦 Ürünler burada -->
   <div id="product-container"></div>
 
+  <!-- 📜 JavaScript dosyası -->
   <script src="script.js"></script>
 </body>
 </html>
