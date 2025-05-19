@@ -4,7 +4,7 @@ fetch('controller_prices_usd.json')
     const container = document.getElementById('product-container');
     container.innerHTML = '';
 
-    
+  
 
     // En ucuz USD fiyatına göre sırala
     data.sort((a, b) => {
@@ -13,10 +13,11 @@ fetch('controller_prices_usd.json')
       return minA - minB;
     });
 
-    // Grid yapısı (her satırda 4 kart)
+    // Grid yapısı (her satırda 2 kart)
     const grid = document.createElement('div');
-    grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 px-4';
+    grid.className = 'grid grid-cols-2 gap-6 mt-6 px-4';
 
+  
     data.forEach(product => {
       if (!product.prices || product.prices.length === 0) return;
 
