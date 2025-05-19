@@ -4,14 +4,16 @@
     "name": "PlayStation DualSense® Wireless Controller - White",
     "price": 73.95,
     "currency": "USD",
-    "price_usd": 73.95
+    "price_usd": 73.95,
+    "image": "https://media.johnlewiscontent.com/i/JohnLewis/239052687alt1?fmt=auto&$background-off-white$"
   },
   {
     "country": "Almanya",
     "name": "DualSense Wireless-Controller [PlayStation 5 ]",
     "price": 61.34,
     "currency": "EUR",
-    "price_usd": 68.48
+    "price_usd": 68.48,
+    "image": "https://media.johnlewiscontent.com/i/JohnLewis/239052687alt1?fmt=auto&$background-off-white$"
   },
   {
     "country": "Türkiye",
