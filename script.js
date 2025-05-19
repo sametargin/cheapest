@@ -49,8 +49,70 @@ fetch('controller_prices_usd.json')
   .catch(err => {
     console.error("❌ JSON verisi okunamadı:", err);
   });
-
-// Gece modu toggle
-document.getElementById('dark-toggle').addEventListener('click', () => {
-  document.documentElement.classList.toggle('dark');
+// Tema değişimi
+const themeToggle = document.getElementById('theme-toggle');
+const currentTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', currentTheme);
+themeToggle.addEventListener('click', () => {
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
 });
+// Tema değişimi için CSS sınıflarını ekleyin
+const style = document.createElement('style');
+style.innerHTML = `
+  [data-theme='dark'] {
+    background-color: #1a202c;
+    color: #f7fafc;
+  }
+  [data-theme='light'] {
+    background-color: #f7fafc;
+    color: #1a202c;
+  }
+`;
+document.head.appendChild(style);
+// Tema değişimi için Tailwind CSS sınıflarını ekleyin
+const tailwindStyle = document.createElement('style');
+tailwindStyle.innerHTML = `
+  [data-theme='dark'] .bg-white {
+    background-color: #2d3748;
+  }
+  [data-theme='dark'] .text-gray-500 {
+    color: #a0aec0;
+  }
+  [data-theme='dark'] .text-green-600 {
+    color: #68d391;
+  }
+  [data-theme='dark'] .text-gray-400 {
+    color: #cbd5e0;
+  }
+`;
+document.head.appendChild(tailwindStyle);
+// Tema değişimi için Tailwind CSS sınıflarını ekleyin
+const tailwindStyle2 = document.createElement('style');
+tailwindStyle2.innerHTML = `
+  [data-theme='dark'] .bg-gray-800 {
+    background-color: #2d3748;
+  }
+  [data-theme='dark'] .text-gray-300 {
+    color: #a0aec0;
+  }
+  [data-theme='dark'] .text-gray-500 {
+    color: #a0aec0;
+  }
+`;
+document.head.appendChild(tailwindStyle2);
+// Tema değişimi için Tailwind CSS sınıflarını ekleyin
+const tailwindStyle3 = document.createElement('style');
+tailwindStyle3.innerHTML = `
+  [data-theme='dark'] .bg-gray-900 {
+    background-color: #1a202c;
+  }
+  [data-theme='dark'] .text-gray-200 {
+    color: #edf2f7;
+  }
+  [data-theme='dark'] .text-gray-400 {
+    color: #cbd5e0;
+  }
+`;
+document.head.appendChild(tailwindStyle3);
