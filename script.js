@@ -1,22 +1,27 @@
 fetch('controller_prices_usd.json')
   .then(res => res.json())
   .then(data => {
-    const container = document.createElement('div');
-    container.style.padding = "40px";
+    const title = document.querySelector('h1');
+
+    // Önceki ürün kartlarını sil
+    const oldCards = document.querySelectorAll('.product');
+    oldCards.forEach(el => el.remove());
+
+    // USD fiyatlarına göre sırala
+    data.sort((a, b) => a.price_usd - b.price_usd);
+
+    // Grid container
+    const grid = document.createElement('div');
+    grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6';
+
     data.forEach(item => {
       const card = document.createElement('div');
-      card.style.background = "#fff";
-      card.style.padding = "20px";
-      card.style.marginBottom = "20px";
-      card.style.borderRadius = "8px";
-      card.style.boxShadow = "0 0 10px #ccc";
+      card.className = 'product bg-white rounded-xl shadow p-4 flex flex-col gap-2 w-full';
+
+      const imageURL = item.image || `https://via.placeholder.com/300x300?text=${encodeURIComponent(item.name)}`;
+      const shopURL = item.url || '#';
+
       card.innerHTML = `
-        <h2>${item.name}</h2>
-        <p><strong>${item.country}</strong>: ${item.price} ${item.currency} ${
-        item.price_usd ? `→ ${item.price_usd} USD` : ''
-      }</p>
-      `;
-      container.appendChild(card);
-    });
-    document.body.appendChild(container);
-  });
+        <img src="${imageURL}" class="w-full rounded-md aspect-square object-cover" alt="Ürün görseli">
+        <h2 class="text-xl font-bold text-gray-800">${item.name}</h2>
+        <
