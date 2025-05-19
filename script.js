@@ -13,9 +13,9 @@ fetch('controller_prices_usd.json')
       return minA - minB;
     });
 
-    // Grid yapısı (her satırda 2 kart)
+    // Grid yapısı (bilgisayarda 4, mobilde 2 kart)
     const grid = document.createElement('div');
-    grid.className = 'grid grid-cols-2 gap-6 mt-6 px-4';
+    grid.className = 'grid grid-cols-2 lg:grid-cols-4 gap-6 mt-6 px-4';
 
   
     data.forEach(product => {
