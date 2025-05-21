@@ -42,7 +42,7 @@ const products = [
   {
     id: "instapot",
     name: "Instant Pot Duo 7-in-1",
-    image: "https://m.media-amazon.com/images/I/71bWwYtQZ7L._AC_SL1500_.jpg",
+    image: "https://i5.walmartimages.com/asr/f6802916-991c-426b-a0cb-de0081b09938.c10a4d8c8d8b7d0b7ebcfe961cdc3b06.jpeg",
     prices: [
       { country: "USA", price: 89, currency: "USD", price_usd: 89 },
       { country: "Germany", price: 99, currency: "EUR", price_usd: 105 },
