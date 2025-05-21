@@ -2,44 +2,134 @@ import React from "react";
 import { Link } from "react-router-dom";
 import products from "./products";
 import logo from "./logoCHPST.png";
+import { FiSettings, FiUser, FiHelpCircle } from "react-icons/fi";
+
+const infoText = `
+  This site helps you shop globally and find products that may be cheaper in other countries you visit.
+  Prices are updated daily but may contain errors or delays. Always check the official website before purchasing.
+`;
 
 function HomePage() {
   return (
     <div style={{ padding: 30 }}>
-      <title>Cheapest Global</title>
-      <h1
+      {/* Kayan bilgi çubuğu */}
+      <div
         style={{
-          color: "white",
-          display: "flex",
-          alignItems: "flex-end",
-          gap: 16,
-          background: "#181818",
-          padding: "16px 0",
+          width: "100%",
+          overflow: "hidden",
+          background: "#222",
+          color: "#ffdb08",
+          fontWeight: 500,
+          fontSize: 16,
+          padding: "8px 0",
+          marginBottom: 18,
+          position: "relative",
         }}
       >
-        <img src={logo} alt="Cheapest Logo" style={{ height: 48, display: "block" }} />
-        <span
+        <div
           style={{
-            fontWeight: 800,
-            fontSize: 40,
-            lineHeight: 1,
-            letterSpacing: 1,
+            display: "inline-block",
+            whiteSpace: "nowrap",
+            animation: "scroll-left 18s linear infinite",
+            minWidth: "100%",
           }}
         >
-          Cheapest
-        </span>
-        <span
-          style={{
-            fontWeight: 400,
-            fontSize: 32,
-            opacity: 0.6,
-            marginLeft: 1,
-            lineHeight: 1,
-          }}
-        >
-          Global
-        </span>
-      </h1>
+          {infoText}
+        </div>
+        {/* Animasyon tanımı */}
+        <style>
+          {`
+            @keyframes scroll-left {
+              0% { transform: translateX(100%); }
+              100% { transform: translateX(-100%); }
+            }
+          `}
+        </style>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "flex-end",
+          justifyContent: "space-between",
+          background: "#181818",
+          padding: "16px 0",
+          gap: 16,
+        }}
+      >
+        {/* Sol: Logo ve Başlık */}
+        <div style={{ display: "flex", alignItems: "flex-end", gap: 16 }}>
+          <img src={logo} alt="Cheapest Logo" style={{ height: 48, display: "block" }} />
+          <span
+            style={{
+              fontWeight: 800,
+              fontSize: 40,
+              lineHeight: 1,
+              letterSpacing: 1,
+            }}
+          >
+            Cheapest
+          </span>
+          <span
+            style={{
+              fontWeight: 400,
+              fontSize: 32,
+              opacity: 0.6,
+              marginLeft: 1,
+              lineHeight: 1,
+            }}
+          >
+            Global
+          </span>
+        </div>
+        {/* Sağ: İkon Butonlar */}
+        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+          <button
+            style={{
+              background: "none",
+              border: "none",
+              color: "#ffdb08",
+              fontSize: 32,
+              cursor: "pointer",
+              padding: 4,
+              display: "flex",
+              alignItems: "center",
+            }}
+            title="Account"
+          >
+            <FiUser />
+          </button>
+          <button
+            style={{
+              background: "none",
+              border: "none",
+              color: "#ffdb08",
+              fontSize: 32,
+              cursor: "pointer",
+              padding: 4,
+              display: "flex",
+              alignItems: "center",
+            }}
+            title="Settings"
+          >
+            <FiSettings />
+          </button>
+          <button
+            style={{
+              background: "none",
+              border: "none",
+              color: "#ffdb08",
+              fontSize: 32,
+              cursor: "pointer",
+              padding: 4,
+              display: "flex",
+              alignItems: "center",
+            }}
+            title="Help"
+          >
+            <FiHelpCircle />
+          </button>
+        </div>
+      </div>
       <div
         style={{
           display: "grid",
