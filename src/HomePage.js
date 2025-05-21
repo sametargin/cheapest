@@ -20,7 +20,7 @@ function HomePage() {
           background: "#222",
           color: "#ffdb08",
           fontWeight: 500,
-          fontSize: 16,
+          fontSize: 12,
           padding: "8px 0",
           marginBottom: 18,
           position: "relative",
@@ -30,7 +30,7 @@ function HomePage() {
           style={{
             display: "inline-block",
             whiteSpace: "nowrap",
-            animation: "scroll-left 18s linear infinite",
+            animation: "scroll-left 30s linear infinite",
             minWidth: "100%",
           }}
         >
