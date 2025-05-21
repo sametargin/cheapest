@@ -33,7 +33,7 @@ function HomePage() {
                   padding: 12,
                   display: "grid",
                   justifyContent: "space-between",
-                  boxShadow: "0 0 8px rgba(29, 57, 109, 0.05)",
+                  boxShadow: "0 0 8px rgba(1, 85, 241, 0.05)",
                 }}
               >
                 <img
