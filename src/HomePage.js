@@ -5,10 +5,10 @@ import logo from "./logoCHPST.png"; // src klasöründeyse
 
 function HomePage() {
   return (
-    <div style={{ padding: 20 }}>
+    <div style={{ padding: 30 }}>
       <h1 style={{ color: 'white', display: 'flex', alignItems: 'center', gap: 8 }}>
+        <img src={logo} alt="Cheapest Logo" style={{ height: 40 }} />
         Cheapest
-        <img src={logo} alt="Cheapest Logo" style={{ height: 32 }} />
       </h1>
       <div
         style={{
@@ -40,7 +40,7 @@ function HomePage() {
                 }}
               >
                 <img
-                  src={product.image.replace(/[^/]+$/, 'product-image-placeholder.png')}
+                  src={product.image ? product.image : "logoCHPST.png"}
                   alt={product.name}
                   style={{ height: 180, objectFit: "contain", marginBottom: 12 }}
                 />
