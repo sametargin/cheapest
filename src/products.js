@@ -12,7 +12,7 @@ const products = [
   {
     id: "macbook",
     name: "MacBook Air M2",
-    image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/macbook-air-m2-hero-2022",
+    image: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/mba13-skyblue-select-202503?wid=892&hei=820&fmt=jpeg&qlt=90&.v=M2RyY09CWXlTQUp1KzEveHR6VXNxcTQ1bzN1SitYTU83Mm9wbk1xa1lWN2h4SGtCQ2R3aStVaDRhL2VUV1NjdkJkRlpCNVhYU3AwTldRQldlSnpRa0lIV0Fmdk9rUlVsZ3hnNXZ3K3lEVlk",
     prices: [
       { country: "USA", price: 1099, currency: "USD", price_usd: 1099 },
       { country: "Germany", price: 1299, currency: "EUR", price_usd: 1387 },
