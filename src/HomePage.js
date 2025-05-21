@@ -16,8 +16,8 @@ function HomePage() {
         {products.map((product) => {
           // En ucuz fiyatı bul
           const cheapest = product.prices.reduce((min, curr) =>
-            curr.price_usd < min.price_usd ? curr : min
-          );
+  curr.price_usd < min.price_usd ? curr : min
+);
           return (
             <Link
               key={product.id}
@@ -43,8 +43,8 @@ function HomePage() {
                 />
                 <h3 style={{ fontSize: 16 }}>{product.name}</h3>
                 <p style={{ fontSize: 14 }}>
-                  Cheapest: {cheapest.country} – {cheapest.price} {cheapest.currency}
-                </p>
+  Cheapest: {cheapest.country} – {cheapest.price} {cheapest.currency}
+</p>
               </div>
             </Link>
           );
