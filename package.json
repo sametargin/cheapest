@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/sametargin/cheapest/issues"
   },
-  "homepage": "https://github.com/sametargin/cheapest#readme"
+  "homepage": "https://github.com/sametargin/cheapest#readme",
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.0",
+    "react-scripts": "^5.0.1"
+  }
 }
