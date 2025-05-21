@@ -28,7 +28,7 @@
   },
   {
     "name": "Big Mac Menü",
-    "image": "https://cdn.getiryemek.com/products/1626189781577_500x375.jpeg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Big_Mac_hamburger.jpg",
     "prices": [
       { "country": "ABD", "price": 10.79, "currency": "USD", "price_usd": 10.79 },
       { "country": "Almanya", "price": 9.49, "currency": "EUR", "price_usd": 10.59 },
