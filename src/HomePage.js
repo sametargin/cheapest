@@ -6,6 +6,7 @@ import logo from "./logoCHPST.png";
 function HomePage() {
   return (
     <div style={{ padding: 30 }}>
+      <title>Cheapest Global</title>
       <h1
         style={{
           color: "white",
@@ -20,7 +21,7 @@ function HomePage() {
         <span
           style={{
             fontWeight: 800,
-            fontSize: 48,
+            fontSize: 40,
             lineHeight: 1,
             letterSpacing: 1,
           }}
@@ -30,9 +31,9 @@ function HomePage() {
         <span
           style={{
             fontWeight: 400,
-            fontSize: 40,
+            fontSize: 32,
             opacity: 0.6,
-            marginLeft: 8,
+            marginLeft: 1,
             lineHeight: 1,
           }}
         >
