@@ -17,59 +17,135 @@ function HomePage() {
     <div>
       {isMobile ? (
         // Mobil görünüm
-        <div style={{ padding: 16 }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <img
-              src={logo}
-              alt="Cheapest Logo"
-              style={{ height: 32, marginRight: 8 }}
-            />
-            <h1>Cheapest (Mobile)</h1>
-          </div>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", // Daha küçük kartlar
-              gap: 16,
-            }}
-          >
-            {products.map((product) => (
-              <Link
-                key={product.id}
-                to={`/product/${product.id}`}
-                style={{ textDecoration: "none", color: "white" }}
+        <div style={{ paddingBottom: 60, position: 'relative', minHeight: '100vh' }}> {/* Alt çubuk için padding ve pozisyon */}
+          <div style={{ padding: 16 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+              <img
+                src={logo}
+                alt="Cheapest Logo"
+                style={{ height: 48, display: "block" }}
+              />
+              <span
+                style={{
+                  fontWeight: 800,
+                  fontSize: 32, // Mobil için küçültülmüş boyut
+                  lineHeight: 1,
+                  letterSpacing: 1,
+                }}
               >
-                <div
-                  className="card"
-                  style={{
-                    height: 300, // Daha kısa kartlar
-                    backgroundColor: "#1e1e1e",
-                    borderRadius: 12,
-                    padding: 12,
-                    display: "grid",
-                    justifyContent: "space-between",
-                    boxShadow: "0 0 8px rgba(29, 57, 109, 0.05)",
-                  }}
+                Cheapest
+              </span>
+              <span
+                style={{
+                  fontWeight: 400,
+                  fontSize: 24, // Mobil için küçültülmüş boyut
+                  opacity: 0.6,
+                  marginLeft: 1,
+                  lineHeight: 1,
+                }}
+              >
+                Global
+              </span>
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", // Daha küçük kartlar
+                gap: 16,
+              }}
+            >
+              {products.map((product) => (
+                <Link
+                  key={product.id}
+                  to={`/product/${product.id}`}
+                  style={{ textDecoration: "none", color: "white" }}
                 >
-                  <img
-                    src={product.image ? product.image : "logoCHPST.png"}
-                    alt={product.name}
-                    style={{ height: 120, objectFit: "contain", marginBottom: 8 }} // Daha küçük resim
-                  />
-                  <h3 style={{ fontSize: 14 }}>{product.name}</h3> {/* Daha küçük başlık */}
-                  <p style={{ fontSize: 12 }}>
-                    Cheapest: {product.prices[0].country} - {product.prices[0].price}{" "}
-                    {product.prices[0].currency}
-                  </p>
-                </div>
-              </Link>
-            ))}
+                  <div
+                    className="card"
+                    style={{
+                      height: 300, // Daha kısa kartlar
+                      backgroundColor: "#1e1e1e",
+                      borderRadius: 12,
+                      padding: 12,
+                      display: "grid",
+                      justifyContent: "space-between",
+                      boxShadow: "0 0 8px rgba(29, 57, 109, 0.05)",
+                    }}
+                  >
+                    <img
+                      src={product.image ? product.image : "logoCHPST.png"}
+                      alt={product.name}
+                      style={{ height: 120, objectFit: "contain", marginBottom: 8 }} // Daha küçük resim
+                    />
+                    <h3 style={{ fontSize: 14 }}>{product.name}</h3> {/* Daha küçük başlık */}
+                    <p style={{ fontSize: 12 }}>
+                      Cheapest: {product.prices[0].country} - {product.prices[0].price}{" "}
+                      {product.prices[0].currency}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+          {/* Sabit araç çubuğu */}
+          <div
+            style={{
+              position: "fixed",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              background: "#181818",
+              display: "flex",
+              justifyContent: "space-around",
+              padding: "8px 0",
+              borderTop: "1px solid #333",
+            }}
+          >
+            <button
+              style={{
+                background: "none",
+                border: "none",
+                color: "#ffdb08",
+                fontSize: 24,
+                cursor: "pointer",
+                padding: 4,
+                display: "flex",
+                alignItems: "center",
+              }}
+              title="Account"
+            >
+              <FiUser />
+            </button>
+            <button
+              style={{
+                background: "none",
+                border: "none",
+                color: "#ffdb08",
+                fontSize: 24,
+                cursor: "pointer",
+                padding: 4,
+                display: "flex",
+                alignItems: "center",
+              }}
+              title="Settings"
+            >
+              <FiSettings />
+            </button>
+            <button
+              style={{
+                background: "none",
+                border: "none",
+                color: "#ffdb08",
+                fontSize: 24,
+                cursor: "pointer",
+                padding: 4,
+                display: "flex",
+                alignItems: "center",
+              }}
+              title="Help"
+            >
+              <FiHelpCircle />
+            </button>
           </div>
         </div>
       ) : (
