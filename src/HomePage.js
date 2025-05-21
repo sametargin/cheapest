@@ -14,8 +14,9 @@ function HomePage() {
         }}
       >
         {products.map((product) => {
-          const turkishPriceObj = product.prices.find(
-            (p) => p.country === "Türkiye"
+          // En ucuz fiyatı bul
+          const cheapest = product.prices.reduce((min, curr) =>
+            curr.price_usd < min.price_usd ? curr : min
           );
           return (
             <Link
@@ -42,10 +43,7 @@ function HomePage() {
                 />
                 <h3 style={{ fontSize: 16 }}>{product.name}</h3>
                 <p style={{ fontSize: 14 }}>
-                  Turkey:{" "}
-                  {turkishPriceObj
-                    ? `${turkishPriceObj.price} ${turkishPriceObj.currency}`
-                    : "N/A"}
+                  Cheapest: {cheapest.country} – {cheapest.price} {cheapest.currency}
                 </p>
               </div>
             </Link>
