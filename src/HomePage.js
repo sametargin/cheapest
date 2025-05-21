@@ -5,33 +5,31 @@ import products from "./products";
 function HomePage() {
   return (
     <div style={{ padding: 20 }}>
-      <h1>Ürünler</h1>
-      <div style={{ display: "flex", gap: 20 }}>
-        {products.map((product) => (
-          <Link
-            key={product.id}
-            to={`/product/${product.id}`}
-            style={{ textDecoration: "none", color: "black" }}
-          >
-            <div
-              style={{
-                border: "1px solid #ccc",
-                borderRadius: 8,
-                padding: 10,
-                width: 200
-              }}
+      <h1>Products</h1>
+      <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
+        {products.map((product) => {
+          const turkishPriceObj = product.prices.find(
+            (p) => p.country === "Türkiye"
+          );
+          return (
+            <Link
+              key={product.id}
+              to={`/product/${product.id}`}
+              style={{ textDecoration: "none", color: "black" }}
             >
-              <img
-                src={product.image}
-                alt={product.name}
-                width="100%"
-                style={{ borderRadius: 4 }}
-              />
-              <h3>{product.name}</h3>
-              <p>Türkiye: {product.prices.find(p => p.country === "Türkiye")?.price} TRY</p>
-            </div>
-          </Link>
-        ))}
+              <div className="card" style={{ width: 200 }}>
+                <img src={product.image} alt={product.name} />
+                <h3>{product.name}</h3>
+                <p>
+                  Turkey:{" "}
+                  {turkishPriceObj
+                    ? `${turkishPriceObj.price} ${turkishPriceObj.currency}`
+                    : "N/A"}
+                </p>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
