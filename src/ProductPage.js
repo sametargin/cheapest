@@ -82,14 +82,15 @@ function ProductPage() {
                   <td style={{ padding: 8 }}>{price.country}</td>
                   <td style={{ padding: 8 }}>{price.price}</td>
                   <td style={{ padding: 8 }}>{price.currency}</td>
-                  <td style={{ padding: 8 }}>
-                    {price.website ? (
-                      <a href={price.website} target="_blank" rel="noopener noreferrer" style={{ color: "#bb86fc" }}>
-                        {price.website.replace(/^https?:\/\//, "").split("/")[0]}
-                      </a>
-                    ) : (
-                      "N/A"
+                  <td style={{ padding: 8, display: "flex", alignItems: "center", gap: 6 }}>
+                    {price.company_logo && (
+                      <img
+                        src={price.company_logo}
+                        alt={price.company}
+                        style={{ width: 20, height: 20, borderRadius: 4, marginRight: 4 }}
+                      />
                     )}
+                    <span>{price.company}</span>
                   </td>
                 </tr>
               ))}

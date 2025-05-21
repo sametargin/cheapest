@@ -4,9 +4,33 @@ const products = [
     name: "PlayStation 5 Console",
     image: "https://m.media-amazon.com/images/I/619BkvKW35L._AC_SL1500_.jpg",
     prices: [
-      { country: "USA", price: 499, currency: "USD", price_usd: 499, website: "https://www.amazon.com" },
-      { country: "Germany", price: 549, currency: "EUR", price_usd: 586, website: "https://www.amazon.de" },
-      { country: "Turkey", price: 21999, currency: "TRY", price_usd: 684, website: "https://www.hepsiburada.com" },
+      {
+        country: "USA",
+        price: 499,
+        currency: "USD",
+        price_usd: 499,
+        company: "Amazon",
+        company_logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+        website: "https://www.amazon.com"
+      },
+      {
+        country: "Germany",
+        price: 549,
+        currency: "EUR",
+        price_usd: 586,
+        company: "Amazon DE",
+        company_logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+        website: "https://www.amazon.de"
+      },
+      {
+        country: "Turkey",
+        price: 21999,
+        currency: "TRY",
+        price_usd: 684,
+        company: "Hepsiburada",
+        company_logo: "https://images.hepsiburada.net/assets/sfstatic/Content/images/favicon-32x32-new.png",
+        website: "https://www.hepsiburada.com"
+      },
     ],
   },
   {
