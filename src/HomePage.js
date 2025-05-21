@@ -10,19 +10,30 @@ function HomePage() {
         style={{
           color: "white",
           display: "flex",
-          alignItems: "center",
-          gap: 10,
+          alignItems: "flex-end",
+          gap: 16,
+          background: "#181818",
+          padding: "16px 0",
         }}
       >
-        <img src={logo} alt="Cheapest Logo" style={{ height: 40 }} />
-        <span style={{ fontWeight: 700 }}>Cheapest</span>
+        <img src={logo} alt="Cheapest Logo" style={{ height: 48, display: "block" }} />
+        <span
+          style={{
+            fontWeight: 800,
+            fontSize: 48,
+            lineHeight: 1,
+            letterSpacing: 1,
+          }}
+        >
+          Cheapest
+        </span>
         <span
           style={{
             fontWeight: 400,
-            fontSize: 20,
-            opacity: 0.7,
-            marginLeft: 4,
-            letterSpacing: 1,
+            fontSize: 40,
+            opacity: 0.6,
+            marginLeft: 8,
+            lineHeight: 1,
           }}
         >
           Global
