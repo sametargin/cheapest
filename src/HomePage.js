@@ -8,9 +8,11 @@ function HomePage() {
       <h1>Products</h1>
       <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
         {products.map((product) => {
+          // Turkey veya Türkiye kontrolü
           const turkishPriceObj = product.prices.find(
-            (p) => p.country === "Türkiye"
+            (p) => p.country === "Turkey" || p.country === "Türkiye"
           );
+
           return (
             <Link
               key={product.id}
