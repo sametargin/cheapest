@@ -1,14 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import products from "./products";
-import logo from "./logoCHPST.png"; // src klasöründeyse
+import logo from "./logoCHPST.png";
 
 function HomePage() {
   return (
     <div style={{ padding: 30 }}>
-      <h1 style={{ color: 'white', display: 'flex', alignItems: 'center', gap: 8 }}>
+      <h1
+        style={{
+          color: "white",
+          display: "flex",
+          alignItems: "center",
+          gap: 10,
+        }}
+      >
         <img src={logo} alt="Cheapest Logo" style={{ height: 40 }} />
-        Cheapest
+        <span style={{ fontWeight: 700 }}>Cheapest</span>
+        <span
+          style={{
+            fontWeight: 400,
+            fontSize: 20,
+            opacity: 0.7,
+            marginLeft: 4,
+            letterSpacing: 1,
+          }}
+        >
+          Global
+        </span>
       </h1>
       <div
         style={{
@@ -42,7 +60,11 @@ function HomePage() {
                 <img
                   src={product.image ? product.image : "logoCHPST.png"}
                   alt={product.name}
-                  style={{ height: 180, objectFit: "contain", marginBottom: 12 }}
+                  style={{
+                    height: 180,
+                    objectFit: "contain",
+                    marginBottom: 12,
+                  }}
                 />
                 <h3 style={{ fontSize: 16 }}>{product.name}</h3>
                 <p style={{ fontSize: 14 }}>

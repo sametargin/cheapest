@@ -11,14 +11,53 @@ function ProductPage() {
     return (
       <div style={{ color: "white", padding: 30 }}>
         <h2>Product not found</h2>
-        <Link to="/" style={{ color: "#bb86fc" }}>Back to Home</Link>
+        <Link to="/" style={{ color: "#ffdb08" }}>Back to Home</Link>
       </div>
     );
   }
 
   return (
     <div style={{ padding: 30, color: "white" }}>
-      <Link to="/" style={{ color: "#bb86fc", textDecoration: "none" }}>← Back</Link>
+      {/* Başlık */}
+      <h1
+        style={{
+          color: "white",
+          display: "flex",
+          alignItems: "center",
+          gap: 10,
+          marginBottom: 24,
+        }}
+      >
+        <img src={logo} alt="Cheapest Logo" style={{ height: 40 }} />
+        <span style={{ fontWeight: 700 }}>Cheapest</span>
+        <span
+          style={{
+            fontWeight: 400,
+            fontSize: 20,
+            opacity: 0.7,
+            marginLeft: 4,
+            letterSpacing: 1,
+          }}
+        >
+          Global
+        </span>
+      </h1>
+
+      <Link
+        to="/"
+        style={{
+          background: "#ffdb08",
+          color: "#222",
+          fontWeight: "bold",
+          textDecoration: "none",
+          padding: "8px 18px",
+          borderRadius: 8,
+          display: "inline-block",
+          marginBottom: 18,
+        }}
+      >
+        ← Back
+      </Link>
       <div style={{ display: "flex", gap: 32, alignItems: "flex-start", marginTop: 24 }}>
         <img
           src={product.image ? product.image : logo}
