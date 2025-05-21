@@ -5,24 +5,43 @@ import products from "./products";
 function HomePage() {
   return (
     <div style={{ padding: 20 }}>
-      <h1>Products</h1>
-      <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
+      <h1 style={{ color: 'white' }}>Cheapest</h1>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+          gap: 25,
+        }}
+      >
         {products.map((product) => {
-          // Turkey veya Türkiye kontrolü
           const turkishPriceObj = product.prices.find(
-            (p) => p.country === "Turkey" || p.country === "Türkiye"
+            (p) => p.country === "Türkiye"
           );
-
           return (
             <Link
               key={product.id}
               to={`/product/${product.id}`}
-              style={{ textDecoration: "none", color: "black" }}
+              style={{ textDecoration: "none", color: "white" }}
             >
-              <div className="card" style={{ width: 200 }}>
-                <img src={product.image} alt={product.name} />
-                <h3>{product.name}</h3>
-                <p>
+              <div
+                className="card"
+                style={{
+                  height: 360,
+                  backgroundColor: "#1e1e1e",
+                  borderRadius: 12,
+                  padding: 12,
+                  display: "grid",
+                  justifyContent: "space-between",
+                  boxShadow: "0 0 8px rgba(29, 57, 109, 0.05)",
+                }}
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  style={{ height: 180, objectFit: "contain", marginBottom: 12 }}
+                />
+                <h3 style={{ fontSize: 16 }}>{product.name}</h3>
+                <p style={{ fontSize: 14 }}>
                   Turkey:{" "}
                   {turkishPriceObj
                     ? `${turkishPriceObj.price} ${turkishPriceObj.currency}`
