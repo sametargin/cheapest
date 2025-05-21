@@ -18,7 +18,20 @@ function HomePage() {
       {isMobile ? (
         // Mobil görünüm
         <div style={{ padding: 16 }}>
-          <h1>Cheapest (Mobile)</h1>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <img
+              src={logo}
+              alt="Cheapest Logo"
+              style={{ height: 32, marginRight: 8 }}
+            />
+            <h1>Cheapest (Mobile)</h1>
+          </div>
           <div
             style={{
               display: "grid",
@@ -51,7 +64,8 @@ function HomePage() {
                   />
                   <h3 style={{ fontSize: 14 }}>{product.name}</h3> {/* Daha küçük başlık */}
                   <p style={{ fontSize: 12 }}>
-                    Cheapest: {product.prices[0].country} - {product.prices[0].price} {product.prices[0].currency}
+                    Cheapest: {product.prices[0].country} - {product.prices[0].price}{" "}
+                    {product.prices[0].currency}
                   </p>
                 </div>
               </Link>
