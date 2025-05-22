@@ -10,7 +10,7 @@ const products = [
         currency: "USD",
         price_usd: 499,
         company: "Amazon",
-        company_logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+        company_logo: "https://static.vecteezy.com/system/resources/thumbnails/019/136/322/small_2x/amazon-logo-amazon-icon-free-free-vector.jpg",
         website: "https://www.amazon.com"
       },
       {
@@ -19,7 +19,7 @@ const products = [
         currency: "EUR",
         price_usd: 586,
         company: "Amazon DE",
-        company_logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+        company_logo: "https://static.vecteezy.com/system/resources/thumbnails/019/136/322/small_2x/amazon-logo-amazon-icon-free-free-vector.jpg",
         website: "https://www.amazon.de"
       },
       {
