@@ -4,7 +4,8 @@ import products from "./products";
 import logo from "./logoCHPST.png";
 import { useCurrency } from './context/CurrencyContext';
 import { useMediaQuery } from "react-responsive";
-import Footer from './components/Footer'; // Footer bileşeni import edildi
+import Footer from './components/Footer';
+import ReactCountryFlag from "react-country-flag"; // ReactCountryFlag import edildi
 
 function HomePage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,6 +16,30 @@ function HomePage() {
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Ülke adlarını ISO 3166-1 Alpha-2 kodlarına eşleyen bir obje
+  const countryCodeMap = {
+    "USA": "US",
+    "Germany": "DE",
+    "Turkey": "TR",
+    "UK": "GB", // Birleşik Krallık için GB kullanılır
+    "Canada": "CA",
+    "Australia": "AU",
+    "France": "FR",
+    "Spain": "ES",
+    "Italy": "IT",
+    "Japan": "JP",
+    "South Korea": "KR",
+    "Mexico": "MX",
+    "Netherlands": "NL",
+    "Sweden": "SE",
+    "Norway": "NO",
+    "Brazil": "BR",
+    "India": "IN",
+    "China": "CN",
+    // Diğer ülkeler için buraya eklemeler yapabilirsiniz
+  };
+
 
   return (
     // Ana kapsayıcı div'in stilini kontrol edin ve gerekirse ekleyin
@@ -115,6 +140,9 @@ function HomePage() {
             return currentPrice.price_usd < minPrice.price_usd ? currentPrice : minPrice;
           }, product.prices[0]); // İlk fiyatı başlangıç değeri olarak al
 
+          // En ucuz fiyatın ülkesinin kodunu al
+          const countryCode = countryCodeMap[cheapestPrice.country];
+
           return (
             <Link
               to={`/product/${product.id}`}
@@ -141,10 +169,27 @@ function HomePage() {
               <h2 style={{ fontSize: 18, marginBottom: 8, textAlign: "center" }}>
                 {product.name}
               </h2>
-              {/* En ucuz fiyatı ve para birimini göster */}
-              <p style={{ fontSize: 16, fontWeight: 'bold', color: '#ffdb08' }}>
-                {convertPrice(cheapestPrice.price_usd)} {selectedCurrency}
-              </p>
+              {/* Bayrak, ülke ve en ucuz fiyatı göster */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 4 }}>
+                {/* Eğer ülke kodu varsa bayrağı göster */}
+                {countryCode && (
+                  <ReactCountryFlag
+                    countryCode={countryCode}
+                    svg // SVG formatını kullan
+                    style={{
+                      width: '1.5em', // Boyut ayarı
+                      height: '1.5em',
+                    }}
+                    title={cheapestPrice.country} // Fare üzerine gelince ülke adını göster
+                  />
+                )}
+                {/* Ülke adını göster */}
+                <span style={{ fontSize: 14, opacity: 0.9 }}>{cheapestPrice.country}</span>
+                {/* En ucuz fiyatı ve para birimini göster */}
+                <p style={{ fontSize: 16, fontWeight: 'bold', color: '#ffdb08', margin: 0 }}>
+                  {convertPrice(cheapestPrice.price_usd)} {selectedCurrency}
+                </p>
+              </div>
             </Link>
           );
         })}
