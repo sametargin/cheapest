@@ -1,77 +1,19 @@
-import React, { useState, useEffect } from "react"; // useState ve useEffect eklendi
+import React from "react";
 import { Link } from "react-router-dom";
 import products from "./products";
 import logo from "./logoCHPST.png";
 import { FiSettings, FiUser, FiHelpCircle } from "react-icons/fi";
 import { useMediaQuery } from "react-responsive";
+import { useCurrency } from './context/CurrencyContext'; // useCurrency hook'unu import edin
 
 const infoText = `
   This site helps you shop globally and find products that may be cheaper in other countries you visit.
   Prices are updated daily but may contain errors or delays. Always check the official website before purchasing.
 `;
 
-// Örnek döviz kurları (Gerçek uygulamada bir API'den çekilmelidir)
-const mockExchangeRates = {
-  USD: 1,
-  EUR: 0.92, // 1 USD = 0.92 EUR (Örnek değer)
-  TRY: 32.5, // 1 USD = 32.5 TRY (Örnek değer)
-  GBP: 0.79, // 1 USD = 0.79 GBP (Örnek değer)
-  // Daha fazla para birimi eklenebilir
-};
-
 function HomePage() {
   const isMobile = useMediaQuery({ maxWidth: 768 });
-  const [selectedCurrency, setSelectedCurrency] = useState("USD"); // Seçilen para birimi state'i
-  const [exchangeRates, setExchangeRates] = useState(mockExchangeRates); // Döviz kurları state'i
-  const [loadingRates, setLoadingRates] = useState(false); // Yüklenme durumu
-
-  // Gerçek uygulamada burada bir API çağrısı yapılmalıdır
-  useEffect(() => {
-    setLoadingRates(true);
-    const apiKey = "fca_live_Tz93khH0tYhIwEUFbSwx05EXMErvOwTs1hbk1VeK"; // API Anahtarınız
-    const apiUrl = `https://api.freecurrencyapi.com/v1/latest?apikey=${apiKey}`;
-
-    fetch(apiUrl)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        // API yanıtının yapısına göre kurları ayarlayın
-        // Free Currency API'nin /latest endpoint'i kurları 'data' objesi içinde döndürür
-        if (data && data.data) {
-           // API'den gelen kurlara USD'yi ekliyoruz çünkü API genellikle base currency'yi döndürmez
-           const ratesWithUSD = { ...data.data, USD: 1 };
-           setExchangeRates(ratesWithUSD);
-        } else {
-           console.error("API response data is not in expected format:", data);
-           // Hata durumunda mock data kullanmaya devam edilebilir veya kullanıcıya bilgi verilebilir
-           setExchangeRates(mockExchangeRates);
-        }
-        setLoadingRates(false);
-      })
-      .catch(error => {
-        console.error("Error fetching exchange rates:", error);
-        setLoadingRates(false);
-        // Hata durumunda mock data kullanmaya devam et
-        setExchangeRates(mockExchangeRates);
-        // Hata durumunda kullanıcıya bilgi verilebilir
-      });
-
-    // Mock data kullanımı kaldırıldı
-    // setExchangeRates(mockExchangeRates);
-  }, []); // Component ilk yüklendiğinde kurları çek
-
-  // Fiyatı seçilen para birimine dönüştüren fonksiyon
-  const convertPrice = (priceUsd) => {
-    if (!exchangeRates || !exchangeRates[selectedCurrency]) {
-      // Kurlar yüklenmediyse, yüklenirken veya para birimi yoksa
-      return loadingRates ? "Loading..." : "N/A";
-    }
-    return (priceUsd * exchangeRates[selectedCurrency]).toFixed(2); // 2 ondalık basamak
-  };
+  const { selectedCurrency, setSelectedCurrency, exchangeRates, loadingRates, convertPrice } = useCurrency(); // Context'ten state ve fonksiyonları alın
 
   return (
     <div>
