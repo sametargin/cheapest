@@ -31,6 +31,34 @@ const products = [
         company_logo: "https://images.hepsiburada.net/assets/sfstatic/Content/images/favicon-32x32-new.png",
         website: "https://www.hepsiburada.com"
       },
+      // Yeni ülkeler eklendi
+      {
+        country: "UK",
+        price: 479,
+        currency: "GBP",
+        price_usd: 608, // Tahmini USD karşılığı
+        company: "Argos",
+        company_logo: "https://cdn.freebiesupply.com/logos/large/2x/argos-1-logo-png-transparent.png", // Logo URL güncellendi
+        website: "https://www.argos.co.uk"
+      },
+      {
+        country: "Canada",
+        price: 649,
+        currency: "CAD",
+        price_usd: 475, // Tahmini USD karşılığı
+        company: "Best Buy CA",
+        company_logo: "https://www.bestbuy.ca/favicon.ico",
+        website: "https://www.bestbuy.ca"
+      },
+      {
+        country: "Australia",
+        price: 799,
+        currency: "AUD",
+        price_usd: 530, // Tahmini USD karşılığı
+        company: "EB Games AU",
+        company_logo: "https://www.ebgames.com.au/favicon.ico",
+        website: "https://www.ebgames.com.au"
+      },
     ],
   },
   {
@@ -41,6 +69,34 @@ const products = [
       { country: "USA", price: 1099, currency: "USD", price_usd: 1099, website: "https://www.apple.com" },
       { country: "Germany", price: 1299, currency: "EUR", price_usd: 1387, website: "https://www.apple.com/de" },
       { country: "Turkey", price: 45999, currency: "TRY", price_usd: 1431, website: "https://www.apple.com/tr" },
+      // Yeni ülkeler eklendi
+      {
+        country: "France",
+        price: 1349,
+        currency: "EUR",
+        price_usd: 1440, // Tahmini USD karşılığı
+        company: "Apple FR",
+        company_logo: "https://www.apple.com/favicon.ico",
+        website: "https://www.apple.com/fr"
+      },
+      {
+        country: "Spain",
+        price: 1329,
+        currency: "EUR",
+        price_usd: 1419, // Tahmini USD karşılığı
+        company: "Apple ES",
+        company_logo: "https://www.apple.com/favicon.ico",
+        website: "https://www.apple.com/es"
+      },
+      {
+        country: "Italy",
+        price: 1359,
+        currency: "EUR",
+        price_usd: 1451, // Tahmini USD karşılığı
+        company: "Apple IT",
+        company_logo: "https://www.apple.com/favicon.ico",
+        website: "https://www.apple.com/it"
+      },
     ],
   },
   {
@@ -51,6 +107,34 @@ const products = [
       { country: "USA", price: 49.99, currency: "USD", price_usd: 49.99, website: "https://www.amazon.com" },
       { country: "Germany", price: 59.99, currency: "EUR", price_usd: 63, website: "https://www.amazon.de" },
       { country: "Turkey", price: 1999, currency: "TRY", price_usd: 62, website: "https://www.trendyol.com" },
+      // Yeni ülkeler eklendi
+      {
+        country: "Japan",
+        price: 7480,
+        currency: "JPY",
+        price_usd: 48, // Tahmini USD karşılığı
+        company: "Amazon JP",
+        company_logo: "https://static.vecteezy.com/system/resources/thumbnails/019/136/322/small_2x/amazon-logo-amazon-icon-free-free-vector.jpg",
+        website: "https://www.amazon.co.jp"
+      },
+      {
+        country: "South Korea",
+        price: 75000,
+        currency: "KRW",
+        price_usd: 55, // Tahmini USD karşılığı
+        company: "Coupang",
+        company_logo: "https://www.coupang.com/favicon.ico",
+        website: "https://www.coupang.com"
+      },
+      {
+        country: "Mexico",
+        price: 1299,
+        currency: "MXN",
+        price_usd: 77, // Tahmini USD karşılığı
+        company: "Amazon MX",
+        company_logo: "https://static.vecteezy.com/system/resources/thumbnails/019/136/322/small_2x/amazon-logo-amazon-icon-free-free-vector.jpg",
+        website: "https://www.amazon.com.mx"
+      },
     ],
   },
   {
@@ -61,6 +145,34 @@ const products = [
       { country: "USA", price: 749, currency: "USD", price_usd: 749, website: "https://www.dyson.com" },
       { country: "Germany", price: 799, currency: "EUR", price_usd: 853, website: "https://www.dyson.de" },
       { country: "Turkey", price: 27999, currency: "TRY", price_usd: 871, website: "https://www.dyson.com.tr" },
+      // Yeni ülkeler eklendi
+      {
+        country: "Netherlands",
+        price: 829,
+        currency: "EUR",
+        price_usd: 885, // Tahmini USD karşılığı
+        company: "Coolblue",
+        company_logo: "https://www.coolblue.nl/favicon.ico",
+        website: "https://www.coolblue.nl"
+      },
+      {
+        country: "Sweden",
+        price: 9490,
+        currency: "SEK",
+        price_usd: 880, // Tahmini USD karşılığı
+        company: "Elgiganten",
+        company_logo: "https://www.elgiganten.se/favicon.ico",
+        website: "https://www.elgiganten.se"
+      },
+      {
+        country: "Norway",
+        price: 9990,
+        currency: "NOK",
+        price_usd: 920, // Tahmini USD karşılığı
+        company: "Power.no",
+        company_logo: "https://www.power.no/favicon.ico",
+        website: "https://www.power.no"
+      },
     ],
   },
   {
@@ -71,6 +183,34 @@ const products = [
       { country: "USA", price: 89, currency: "USD", price_usd: 89, website: "https://www.walmart.com" },
       { country: "Germany", price: 99, currency: "EUR", price_usd: 105, website: "https://www.amazon.de" },
       { country: "Turkey", price: 3499, currency: "TRY", price_usd: 109, website: "https://www.trendyol.com" },
+      // Yeni ülkeler eklendi
+      {
+        country: "Brazil",
+        price: 599,
+        currency: "BRL",
+        price_usd: 115, // Tahmini USD karşılığı
+        company: "Amazon BR",
+        company_logo: "https://static.vecteezy.com/system/resources/thumbnails/019/136/322/small_2x/amazon-logo-amazon-icon-free-free-vector.jpg",
+        website: "https://www.amazon.com.br"
+      },
+      {
+        country: "India",
+        price: 7499,
+        currency: "INR",
+        price_usd: 90, // Tahmini USD karşılığı
+        company: "Amazon IN",
+        company_logo: "https://static.vecteezy.com/system/resources/thumbnails/019/136/322/small_2x/amazon-logo-amazon-icon-free-free-vector.jpg",
+        website: "https://www.amazon.in"
+      },
+      {
+        country: "China",
+        price: 699,
+        currency: "CNY",
+        price_usd: 97, // Tahmini USD karşılığı
+        company: "JD.com",
+        company_logo: "https://www.jd.com/favicon.ico",
+        website: "https://www.jd.com"
+      },
     ],
   },
 ];
