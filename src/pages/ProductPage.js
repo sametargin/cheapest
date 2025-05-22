@@ -1,10 +1,10 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import products from "./products";
-import logo from "./logoCHPST.png";
-import { useCurrency } from './context/CurrencyContext';
+import products from "../products"; // Import yolu düzeltildi
+import logo from "../logoCHPST.png"; // Import yolu düzeltildi
+import { useCurrency } from '../context/CurrencyContext'; // Import yolu düzeltildi
 import { useMediaQuery } from "react-responsive";
-import Footer from './components/Footer';
+import Footer from '../components/Footer'; // Import yolu düzeltildi
 
 function ProductPage() {
   const { id } = useParams();
@@ -125,11 +125,11 @@ function ProductPage() {
             borderRadius: 12,
             padding: 12,
             maxWidth: isMobile ? '100%' : 'auto',
-            transition: "transform 0.2s ease-in-out", // Geçiş efekti eklendi
-            cursor: 'pointer' // İmleci işaretçiye çevir
+            transition: "transform 0.2s ease-in-out",
+            cursor: 'pointer'
           }}
-          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.1)"} // Hover'da büyüt
-          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"} // Hover bitince normale dön
+          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.1)"}
+          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
         />
         <div style={{ width: isMobile ? '100%' : 'auto' }}>
           <h1 style={{ marginBottom: 12, fontSize: isMobile ? 20 : 24 }}>{product.name}</h1>
