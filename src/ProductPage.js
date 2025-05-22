@@ -4,6 +4,7 @@ import products from "./products";
 import logo from "./logoCHPST.png";
 import { useCurrency } from './context/CurrencyContext';
 import { useMediaQuery } from "react-responsive"; // useMediaQuery import edildi
+import Footer from './components/Footer'; // Footer bileşeni import edildi
 
 function ProductPage() {
   const { id } = useParams();
@@ -23,7 +24,7 @@ function ProductPage() {
   }
 
   return (
-    <div style={{ padding: isMobile ? 16 : 30, color: "white" }}> {/* Mobil için padding azaltıldı */}
+    <div style={{ padding: isMobile ? 16 : 30, color: "white", minHeight: '100vh', display: 'flex', flexDirection: 'column' }}> {/* Mobil için padding azaltıldı, minHeight ve flex ayarları eklendi */}
       {/* Başlık ve Para Birimi Seçici */}
       <div style={{
         display: "flex",
@@ -111,7 +112,8 @@ function ProductPage() {
         flexDirection: isMobile ? "column" : "row", // Mobil için dikey hizalama
         gap: isMobile ? 24 : 32, // Mobil için gap ayarı
         alignItems: "flex-start",
-        marginTop: 24
+        marginTop: 24,
+        flexGrow: 1 // Ana içeriğin footer'ı aşağı itmesini sağlar
       }}>
         <img
           src={product.image ? product.image : logo}
@@ -143,7 +145,8 @@ function ProductPage() {
                   {/* Başlık hücrelerine kenarlık eklendi */}
                   <th style={{ padding: 8, textAlign: 'left', border: '1px solid #444' }}>Country</th>
                   <th style={{ padding: 8, textAlign: 'left', border: '1px solid #444' }}>Price ({selectedCurrency})</th>
-                  <th style={{ padding: 8, textAlign: 'left', border: '1px solid #444' }}>Original Currency</th>
+                  {/* "Original Currency" yerine "Original Price" yazıldı */}
+                  <th style={{ padding: 8, textAlign: 'left', border: '1px solid #444' }}>Original Price</th>
                   <th style={{ padding: 8, textAlign: 'left', border: '1px solid #444' }}>Website</th>
                 </tr>
               </thead>
@@ -179,6 +182,9 @@ function ProductPage() {
           </div>
         </div>
       </div>
+
+      {/* Footer bileşeni kullanıldı */}
+      <Footer />
     </div>
   );
 }

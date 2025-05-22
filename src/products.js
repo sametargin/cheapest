@@ -66,16 +66,15 @@ const products = [
     name: "MacBook Air M2",
     image: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/mba13-skyblue-select-202503?wid=892&hei=820&fmt=jpeg&qlt=90&.v=M2RyY09CWXlTQUp1KzEveHR6VXNxcTQ1bzN1SitYTU83Mm9wbk1xa1lWN2h4SGtCQ2R3aStVaDRhL2VUV1NjdkJkRlpCNVhYU3AwTldRQldlSnpRa0lIV0Fmdk9rUlVsZ3hnNXZ3K3lEVlk",
     prices: [
-      { country: "USA", price: 1099, currency: "USD", price_usd: 1099, website: "https://www.apple.com" },
-      { country: "Germany", price: 1299, currency: "EUR", price_usd: 1387, website: "https://www.apple.com/de" },
-      { country: "Turkey", price: 45999, currency: "TRY", price_usd: 1431, website: "https://www.apple.com/tr" },
-      // Yeni ülkeler eklendi
+      // Website bilgileri eklendi
+      { country: "USA", price: 1099, currency: "USD", price_usd: 1099, company: "Apple US", company_logo: "https://www.apple.com/favicon.ico", website: "https://www.apple.com" },
+      { country: "Germany", price: 1299, currency: "EUR", price_usd: 1387, company: "Apple DE", company_logo: "https://www.apple.com/favicon.ico", website: "https://www.apple.com/de" },
+      { country: "Turkey", price: 45999, currency: "TRY", price_usd: 1431, company: "Apple TR", company_logo: "https://www.apple.com/favicon.ico", website: "https://www.apple.com/tr" },
       {
         country: "France",
         price: 1349,
         currency: "EUR",
-        price_usd: 1440, // Tahmini USD karşılığı
-        company: "Apple FR",
+        price_usd: 1440,        company: "Apple FR",
         company_logo: "https://www.apple.com/favicon.ico",
         website: "https://www.apple.com/fr"
       },
@@ -83,8 +82,7 @@ const products = [
         country: "Spain",
         price: 1329,
         currency: "EUR",
-        price_usd: 1419, // Tahmini USD karşılığı
-        company: "Apple ES",
+        price_usd: 1419,        company: "Apple ES",
         company_logo: "https://www.apple.com/favicon.ico",
         website: "https://www.apple.com/es"
       },
@@ -92,8 +90,7 @@ const products = [
         country: "Italy",
         price: 1359,
         currency: "EUR",
-        price_usd: 1451, // Tahmini USD karşılığı
-        company: "Apple IT",
+        price_usd: 1451,        company: "Apple IT",
         company_logo: "https://www.apple.com/favicon.ico",
         website: "https://www.apple.com/it"
       },
