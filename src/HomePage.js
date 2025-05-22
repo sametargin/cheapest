@@ -27,27 +27,48 @@ function HomePage() {
 
   // Gerçek uygulamada burada bir API çağrısı yapılmalıdır
   useEffect(() => {
-    // setLoadingRates(true);
-    // fetch('YOUR_EXCHANGE_RATE_API_URL')
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     setExchangeRates(data.rates); // API yanıtına göre ayarla
-    //     setLoadingRates(false);
-    //   })
-    //   .catch(error => {
-    //     console.error("Error fetching exchange rates:", error);
-    //     setLoadingRates(false);
-    //     // Hata durumunda kullanıcıya bilgi verilebilir
-    //   });
+    setLoadingRates(true);
+    const apiKey = "fca_live_Tz93khH0tYhIwEUFbSwx05EXMErvOwTs1hbk1VeK"; // API Anahtarınız
+    const apiUrl = `https://api.freecurrencyapi.com/v1/latest?apikey=${apiKey}`;
 
-    // Şimdilik mock data kullanıyoruz
-    setExchangeRates(mockExchangeRates);
+    fetch(apiUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        // API yanıtının yapısına göre kurları ayarlayın
+        // Free Currency API'nin /latest endpoint'i kurları 'data' objesi içinde döndürür
+        if (data && data.data) {
+           // API'den gelen kurlara USD'yi ekliyoruz çünkü API genellikle base currency'yi döndürmez
+           const ratesWithUSD = { ...data.data, USD: 1 };
+           setExchangeRates(ratesWithUSD);
+        } else {
+           console.error("API response data is not in expected format:", data);
+           // Hata durumunda mock data kullanmaya devam edilebilir veya kullanıcıya bilgi verilebilir
+           setExchangeRates(mockExchangeRates);
+        }
+        setLoadingRates(false);
+      })
+      .catch(error => {
+        console.error("Error fetching exchange rates:", error);
+        setLoadingRates(false);
+        // Hata durumunda mock data kullanmaya devam et
+        setExchangeRates(mockExchangeRates);
+        // Hata durumunda kullanıcıya bilgi verilebilir
+      });
+
+    // Mock data kullanımı kaldırıldı
+    // setExchangeRates(mockExchangeRates);
   }, []); // Component ilk yüklendiğinde kurları çek
 
   // Fiyatı seçilen para birimine dönüştüren fonksiyon
   const convertPrice = (priceUsd) => {
     if (!exchangeRates || !exchangeRates[selectedCurrency]) {
-      return "N/A"; // Kurlar yüklenmediyse veya para birimi yoksa
+      // Kurlar yüklenmediyse, yüklenirken veya para birimi yoksa
+      return loadingRates ? "Loading..." : "N/A";
     }
     return (priceUsd * exchangeRates[selectedCurrency]).toFixed(2); // 2 ondalık basamak
   };
@@ -100,12 +121,17 @@ function HomePage() {
                   border: '1px solid #555',
                   fontSize: 14,
                 }}
+                disabled={loadingRates} // Kurlar yüklenirken seçiciyi devre dışı bırak
               >
-                {Object.keys(mockExchangeRates).map((currency) => (
-                  <option key={currency} value={currency}>
-                    {currency}
-                  </option>
-                ))}
+                 {loadingRates ? (
+                   <option>Loading...</option>
+                 ) : (
+                   Object.keys(exchangeRates).map((currency) => (
+                     <option key={currency} value={currency}>
+                       {currency}
+                     </option>
+                   ))
+                 )}
               </select>
             </div>
 
@@ -351,12 +377,17 @@ function HomePage() {
                  border: '1px solid #555',
                  fontSize: 16,
                }}
+               disabled={loadingRates} // Kurlar yüklenirken seçiciyi devre dışı bırak
              >
-               {Object.keys(mockExchangeRates).map((currency) => (
-                 <option key={currency} value={currency}>
-                   {currency}
-                 </option>
-               ))}
+               {loadingRates ? (
+                 <option>Loading...</option>
+               ) : (
+                 Object.keys(exchangeRates).map((currency) => (
+                   <option key={currency} value={currency}>
+                     {currency}
+                   </option>
+                 ))
+               )}
              </select>
            </div>
           <div
