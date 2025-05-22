@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; // Link import edildi
 import products from "./products";
 import logo from "./logoCHPST.png";
 import { FiSettings, FiUser, FiHelpCircle } from "react-icons/fi";
 import { useMediaQuery } from "react-responsive";
-import { useCurrency } from './context/CurrencyContext'; // useCurrency hook'unu import edin
+import { useCurrency } from './context/CurrencyContext';
 
 const infoText = `
   This site helps you shop globally and find products that may be cheaper in other countries you visit.
@@ -13,26 +13,27 @@ const infoText = `
 
 function HomePage() {
   const isMobile = useMediaQuery({ maxWidth: 768 });
-  const { selectedCurrency, setSelectedCurrency, exchangeRates, loadingRates, convertPrice } = useCurrency(); // Context'ten state ve fonksiyonları alın
+  const { selectedCurrency, setSelectedCurrency, exchangeRates, loadingRates, convertPrice } = useCurrency();
 
   return (
     <div>
       {isMobile ? (
         // Mobil görünüm
-        <div style={{ paddingBottom: 60, position: 'relative', minHeight: '100vh' }}> {/* Alt çubuk için padding ve pozisyon */}
+        <div style={{ paddingBottom: 60, position: 'relative', minHeight: '100vh' }}>
           <div style={{ padding: 16 }}>
             {/* Logo, Başlık ve Para Birimi Seçici */}
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, marginBottom: 16 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              {/* Logo ve Başlık Link ile Sarmalandı */}
+              <Link to="/" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: 8 }}>
                 <img
                   src={logo}
                   alt="Cheapest Logo"
-                  style={{ height: 40, display: "block" }} // Mobil için biraz küçültülmüş logo
+                  style={{ height: 40, display: "block" }}
                 />
                 <span
                   style={{
                     fontWeight: 800,
-                    fontSize: 28, // Mobil için küçültülmüş boyut
+                    fontSize: 28,
                     lineHeight: 1,
                     letterSpacing: 1,
                   }}
@@ -42,7 +43,7 @@ function HomePage() {
                 <span
                   style={{
                     fontWeight: 400,
-                    fontSize: 20, // Mobil için küçültülmüş boyut
+                    fontSize: 20,
                     opacity: 0.6,
                     marginLeft: 1,
                     lineHeight: 1,
@@ -50,7 +51,7 @@ function HomePage() {
                 >
                   Global
                 </span>
-              </div>
+              </Link>
               {/* Para Birimi Seçici */}
               <select
                 value={selectedCurrency}
@@ -63,7 +64,7 @@ function HomePage() {
                   border: '1px solid #555',
                   fontSize: 14,
                 }}
-                disabled={loadingRates} // Kurlar yüklenirken seçiciyi devre dışı bırak
+                disabled={loadingRates}
               >
                  {loadingRates ? (
                    <option>Loading...</option>
@@ -80,7 +81,7 @@ function HomePage() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", // Daha küçük kartlar
+                gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
                 gap: 16,
               }}
             >
@@ -93,7 +94,7 @@ function HomePage() {
                   <div
                     className="card"
                     style={{
-                      height: 300, // Daha kısa kartlar
+                      height: 300,
                       backgroundColor: "#1e1e1e",
                       borderRadius: 12,
                       padding: 12,
@@ -105,12 +106,12 @@ function HomePage() {
                     <img
                       src={product.image ? product.image : "logoCHPST.png"}
                       alt={product.name}
-                      style={{ height: 120, objectFit: "contain", marginBottom: 8 }} // Daha küçük resim
+                      style={{ height: 120, objectFit: "contain", marginBottom: 8 }}
                     />
-                    <h3 style={{ fontSize: 14 }}>{product.name}</h3> {/* Daha küçük başlık */}
+                    <h3 style={{ fontSize: 14 }}>{product.name}</h3>
                     <p style={{ fontSize: 12 }}>
-                      Cheapest: {product.prices[0].country} - {convertPrice(product.prices[0].price_usd)}{" "} {/* Dönüştürülmüş fiyat */}
-                      {selectedCurrency} {/* Seçilen para birimi */}
+                      Cheapest: {product.prices[0].country} - {convertPrice(product.prices[0].price_usd)}{" "}
+                      {selectedCurrency}
                     </p>
                   </div>
                 </Link>
@@ -226,8 +227,8 @@ function HomePage() {
               gap: 16,
             }}
           >
-            {/* Sol: Logo ve Başlık */}
-            <div style={{ display: "flex", alignItems: "flex-end", gap: 16 }}>
+            {/* Sol: Logo ve Başlık Link ile Sarmalandı */}
+            <Link to="/" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'flex-end', gap: 16 }}>
               <img
                 src={logo}
                 alt="Cheapest Logo"
@@ -254,7 +255,7 @@ function HomePage() {
               >
                 Global
               </span>
-            </div>
+            </Link>
             {/* Sağ: İkon Butonlar */}
             <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
               <button
@@ -319,7 +320,7 @@ function HomePage() {
                  border: '1px solid #555',
                  fontSize: 16,
                }}
-               disabled={loadingRates} // Kurlar yüklenirken seçiciyi devre dışı bırak
+               disabled={loadingRates}
              >
                {loadingRates ? (
                  <option>Loading...</option>
@@ -340,7 +341,6 @@ function HomePage() {
             }}
           >
             {products.map((product) => {
-              // Cheapest fiyatı USD cinsinden alıp dönüştürüyoruz
               const cheapest = product.prices.reduce((min, curr) =>
                 curr.price_usd < min.price_usd ? curr : min
               );
@@ -373,8 +373,8 @@ function HomePage() {
                     />
                     <h3 style={{ fontSize: 16 }}>{product.name}</h3>
                     <p style={{ fontSize: 14 }}>
-                      Cheapest: {cheapest.country} – {convertPrice(cheapest.price_usd)}{" "} {/* Dönüştürülmüş fiyat */}
-                      {selectedCurrency} {/* Seçilen para birimi */}
+                      Cheapest: {cheapest.country} – {convertPrice(cheapest.price_usd)}{" "}
+                      {selectedCurrency}
                     </p>
                   </div>
                 </Link>

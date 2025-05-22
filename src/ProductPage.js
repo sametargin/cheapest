@@ -1,17 +1,15 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom"; // Link import edildi
 import products from "./products";
 import logo from "./logoCHPST.png";
-import { useCurrency } from './context/CurrencyContext'; // useCurrency hook'unu import edin
+import { useCurrency } from './context/CurrencyContext';
 
 function ProductPage() {
-  const { id } = useParams(); // URL'den ürün ID'sini alın
+  const { id } = useParams();
 
-  // Ürünü bulurken ID'leri string olarak karşılaştıralım
-  // parseInt kullanmak string ID'ler için yanlıştı
-  const product = products.find((p) => p.id === id); // Karşılaştırma düzeltildi
+  const product = products.find((p) => p.id === id);
 
-  const { selectedCurrency, setSelectedCurrency, exchangeRates, loadingRates, convertPrice } = useCurrency(); // Context'ten state ve fonksiyonları alın
+  const { selectedCurrency, setSelectedCurrency, exchangeRates, loadingRates, convertPrice } = useCurrency();
 
   if (!product) {
     return (
@@ -26,13 +24,15 @@ function ProductPage() {
     <div style={{ padding: 30, color: "white" }}>
       {/* Başlık ve Para Birimi Seçici */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
-        <h1
+        {/* Logo ve Başlık Link ile Sarmalandı */}
+        <Link to="/"
           style={{
             color: "white",
             display: "flex",
             alignItems: "center",
             gap: 10,
-            margin: 0 // Margin sıfırlandı
+            margin: 0,
+            textDecoration: 'none' // Link alt çizgisini kaldır
           }}
         >
           <img src={logo} alt="Cheapest Logo" style={{ height: 40 }} />
@@ -48,7 +48,7 @@ function ProductPage() {
           >
             Global
           </span>
-        </h1>
+        </Link>
         {/* Para Birimi Seçici */}
         <div style={{ textAlign: 'right' }}>
           <label htmlFor="currency-select" style={{ color: '#fff', marginRight: 8 }}>Para Birimi:</label>
@@ -64,7 +64,7 @@ function ProductPage() {
               border: '1px solid #555',
               fontSize: 16,
             }}
-            disabled={loadingRates} // Kurlar yüklenirken seçiciyi devre dışı bırak
+            disabled={loadingRates}
           >
             {loadingRates ? (
               <option>Loading...</option>
@@ -108,8 +108,8 @@ function ProductPage() {
             <thead>
               <tr>
                 <th style={{ padding: 8 }}>Country</th>
-                <th style={{ padding: 8 }}>Price ({selectedCurrency})</th> {/* Başlık güncellendi */}
-                <th style={{ padding: 8 }}>Original Currency</th> {/* Yeni sütun başlığı */}
+                <th style={{ padding: 8 }}>Price ({selectedCurrency})</th>
+                <th style={{ padding: 8 }}>Original Currency</th>
                 <th style={{ padding: 8 }}>Website</th>
               </tr>
             </thead>
@@ -117,8 +117,8 @@ function ProductPage() {
               {product.prices.map((price, idx) => (
                 <tr key={idx}>
                   <td style={{ padding: 8 }}>{price.country}</td>
-                  <td style={{ padding: 8 }}>{convertPrice(price.price_usd)} {selectedCurrency}</td> {/* Dönüştürülmüş fiyat ve para birimi */}
-                  <td style={{ padding: 8 }}>{price.price} {price.currency}</td> {/* Orijinal fiyat ve para birimi */}
+                  <td style={{ padding: 8 }}>{convertPrice(price.price_usd)} {selectedCurrency}</td>
+                  <td style={{ padding: 8 }}>{price.price} {price.currency}</td>
                   <td style={{ padding: 8, display: "flex", alignItems: "center", gap: 6 }}>
                     {price.company_logo && (
                       <img
