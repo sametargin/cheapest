@@ -1,10 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Footer from '../components/Footer'; // Footer bileşenini import edin
+import Footer from '../components/Footer';
+import { useTheme } from '../context/ThemeContext';
 
 function HelpPage() {
+  const { isDarkMode } = useTheme();
+
   return (
-    <div style={{ padding: 30, color: "white", minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ 
+      padding: 30, 
+      color: isDarkMode ? "white" : "#333",
+      backgroundColor: isDarkMode ? "#1a1a1a" : "#ffffff",
+      minHeight: '100vh', 
+      display: 'flex', 
+      flexDirection: 'column' 
+    }}>
       <h1 style={{ marginBottom: 20 }}>Help</h1>
       <p style={{ marginBottom: 15 }}>
         Welcome to the Help page. Here you can find information about how to use Cheapest Global.

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "./logoCHPST.png";
 import { useCurrency } from './context/CurrencyContext';
+import { useTheme } from './context/ThemeContext';
 import { useMediaQuery } from "react-responsive";
 import Footer from './components/Footer';
 import ReactCountryFlag from "react-country-flag";
@@ -10,6 +11,7 @@ import axios from 'axios';
 function HomePage() {
   const [searchTerm, setSearchTerm] = useState("");
   const isMobile = useMediaQuery({ maxWidth: 768 });
+  const { isDarkMode } = useTheme();
 
   const { selectedCurrency, setSelectedCurrency, exchangeRates, loadingRates, convertPrice } = useCurrency();
 
@@ -72,7 +74,14 @@ function HomePage() {
   }
 
   return (
-    <div style={{ padding: isMobile ? 16 : 30, color: "white", minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ 
+      padding: isMobile ? "20px" : "30px", 
+      color: isDarkMode ? "white" : "#333",
+      backgroundColor: isDarkMode ? "#1a1a1a" : "#ffffff",
+      minHeight: "100vh",
+      display: 'flex',
+      flexDirection: 'column' 
+    }}>
       {/* Başlık ve Para Birimi Seçici */}
       <div style={{
         display: "flex",

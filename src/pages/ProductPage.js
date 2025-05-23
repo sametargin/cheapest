@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import logo from "../logoCHPST.png";
 import { useCurrency } from '../context/CurrencyContext';
+import { useTheme } from '../context/ThemeContext';
 import { useMediaQuery } from "react-responsive";
 import Footer from '../components/Footer';
 import axios from 'axios';
+import ReactCountryFlag from "react-country-flag";
 
 function ProductPage() {
   const { id } = useParams();
   const isMobile = useMediaQuery({ maxWidth: 768 });
+  const { isDarkMode } = useTheme();
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -89,7 +92,14 @@ function ProductPage() {
   }
 
   return (
-    <div style={{ padding: isMobile ? 16 : 30, color: "white", minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ 
+      padding: isMobile ? 16 : 30, 
+      color: isDarkMode ? "white" : "#333",
+      backgroundColor: isDarkMode ? "#1a1a1a" : "#ffffff",
+      minHeight: '100vh', 
+      display: 'flex', 
+      flexDirection: 'column' 
+    }}>
       {/* Başlık ve Para Birimi Seçici */}
       <div style={{
         display: "flex",

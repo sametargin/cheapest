@@ -1,10 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Footer from '../components/Footer'; // Footer bileşenini import edin
+import Footer from '../components/Footer';
+import { useTheme } from '../context/ThemeContext';
 
 function AboutPage() {
+  const { isDarkMode } = useTheme();
+
   return (
-    <div style={{ padding: 30, color: "white", minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ 
+      padding: 30, 
+      color: isDarkMode ? "white" : "#333",
+      backgroundColor: isDarkMode ? "#1a1a1a" : "#ffffff",
+      minHeight: '100vh', 
+      display: 'flex', 
+      flexDirection: 'column' 
+    }}>
       <h1 style={{ marginBottom: 20 }}>About Us</h1>
       <p style={{ marginBottom: 15 }}>
         Cheapest Global is a project aimed at comparing product prices from various online retailers around the world.
