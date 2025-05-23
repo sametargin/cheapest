@@ -23,7 +23,7 @@ function ProductPage() {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        // Tam URL kullanıldı
+        // Tam URL kullanıldığından emin olun
         const response = await axios.get(`http://localhost:3001/api/products/${id}`);
         setProduct(response.data);
         setError(null);
