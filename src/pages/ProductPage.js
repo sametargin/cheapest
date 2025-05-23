@@ -1,46 +1,83 @@
-import React, { useState } from "react"; // useState import edildi
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import products from "../products";
 import logo from "../logoCHPST.png";
 import { useCurrency } from '../context/CurrencyContext';
 import { useMediaQuery } from "react-responsive";
 import Footer from '../components/Footer';
+import axios from 'axios';
 
 function ProductPage() {
   const { id } = useParams();
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
-  const product = products.find((p) => p.id === id);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const { selectedCurrency, setSelectedCurrency, exchangeRates, loadingRates, convertPrice } = useCurrency();
 
-  // Yorumlar için state
   const [comments, setComments] = useState([]);
-  // Yeni yorum girişi için state
   const [newComment, setNewComment] = useState({ nickname: '', comment: '' });
 
-  // Yorum gönderme fonksiyonu
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        setLoading(true);
+        // Tam URL kullanıldı
+        const response = await axios.get(`http://localhost:3001/api/products/${id}`);
+        setProduct(response.data);
+        setError(null);
+      } catch (err) {
+        setError("Failed to fetch product data.");
+        setProduct(null);
+        console.error("Error fetching product:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+
+    const storedComments = localStorage.getItem(`comments_${id}`);
+    if (storedComments) {
+      setComments(JSON.parse(storedComments));
+    } else {
+      setComments([]);
+    }
+
+  }, [id]);
+
+  useEffect(() => {
+    localStorage.setItem(`comments_${id}`, JSON.stringify(comments));
+  }, [comments, id]);
+
+
   const handleAddComment = (e) => {
-    e.preventDefault(); // Sayfanın yeniden yüklenmesini engelle
+    e.preventDefault();
 
     if (newComment.nickname.trim() === '' || newComment.comment.trim() === '') {
       alert('Please enter both nickname and comment.');
       return;
     }
 
-    // Yeni yorum objesi oluştur
     const commentToAdd = {
       nickname: newComment.nickname,
       comment: newComment.comment,
-      timestamp: new Date().toLocaleString() // Yorum zamanını ekle
+      timestamp: new Date().toLocaleString()
     };
 
-    // Yorumları state'e ekle (mevcut yorumların başına yeni yorumu ekleyelim)
     setComments([commentToAdd, ...comments]);
 
-    // Giriş alanlarını temizle
     setNewComment({ nickname: '', comment: '' });
   };
+
+  if (loading) {
+    return <div style={{ color: "white", padding: 30 }}>Loading product...</div>;
+  }
+
+  if (error) {
+    return <div style={{ color: "red", padding: 30 }}>{error}</div>;
+  }
 
   if (!product) {
     return (
@@ -243,7 +280,7 @@ function ProductPage() {
               backgroundColor: '#333',
               color: 'white',
               fontSize: 16,
-              resize: 'vertical', // Sadece dikey yeniden boyutlandırmaya izin ver
+              resize: 'vertical',
             }}
           ></textarea>
           <button
@@ -257,7 +294,7 @@ function ProductPage() {
               fontWeight: 'bold',
               cursor: 'pointer',
               fontSize: 16,
-              alignSelf: 'flex-start' // Sola hizala
+              alignSelf: 'flex-start'
             }}
           >
             Add Comment

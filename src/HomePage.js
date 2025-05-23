@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import products from "./products";
 import logo from "./logoCHPST.png";
 import { useCurrency } from './context/CurrencyContext';
 import { useMediaQuery } from "react-responsive";
 import Footer from './components/Footer';
-import ReactCountryFlag from "react-country-flag"; // ReactCountryFlag import edildi
+import ReactCountryFlag from "react-country-flag";
+import axios from 'axios';
 
 function HomePage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -13,16 +13,40 @@ function HomePage() {
 
   const { selectedCurrency, setSelectedCurrency, exchangeRates, loadingRates, convertPrice } = useCurrency();
 
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Ürün verisini API'den çekmek için useEffect
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        // Tam URL kullanıldığından emin olun
+        const response = await axios.get('http://localhost:3001/api/products');
+        setProducts(response.data);
+        setError(null);
+      } catch (err) {
+        setError("Failed to fetch products.");
+        setProducts([]);
+        console.error("Error fetching products:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Ülke adlarını ISO 3166-1 Alpha-2 kodlarına eşleyen bir obje
   const countryCodeMap = {
     "USA": "US",
     "Germany": "DE",
     "Turkey": "TR",
-    "UK": "GB", // Birleşik Krallık için GB kullanılır
+    "UK": "GB",
     "Canada": "CA",
     "Australia": "AU",
     "France": "FR",
@@ -37,12 +61,17 @@ function HomePage() {
     "Brazil": "BR",
     "India": "IN",
     "China": "CN",
-    // Diğer ülkeler için buraya eklemeler yapabilirsiniz
   };
 
+  if (loading) {
+    return <div style={{ color: "white", padding: 30 }}>Loading products...</div>;
+  }
+
+  if (error) {
+    return <div style={{ color: "red", padding: 30 }}>{error}</div>;
+  }
 
   return (
-    // Ana kapsayıcı div'in stilini kontrol edin ve gerekirse ekleyin
     <div style={{ padding: isMobile ? 16 : 30, color: "white", minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       {/* Başlık ve Para Birimi Seçici */}
       <div style={{
@@ -127,20 +156,17 @@ function HomePage() {
       />
 
       {/* Ürün Listesi */}
-      {/* Bu div'e flexGrow: 1 ekleyerek içeriğin footer'ı aşağı itmesini sağlayın */}
       <div style={{
         display: "grid",
         gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fill, minmax(250px, 1fr))",
         gap: isMobile ? 16 : 24,
-        flexGrow: 1 // İçeriğin footer'ı aşağı itmesini sağlar
+        flexGrow: 1
       }}>
         {filteredProducts.map((product) => {
-          // En ucuz fiyatı bul
           const cheapestPrice = product.prices.reduce((minPrice, currentPrice) => {
             return currentPrice.price_usd < minPrice.price_usd ? currentPrice : minPrice;
-          }, product.prices[0]); // İlk fiyatı başlangıç değeri olarak al
+          }, product.prices[0]);
 
-          // En ucuz fiyatın ülkesinin kodunu al
           const countryCode = countryCodeMap[cheapestPrice.country];
 
           return (
@@ -169,23 +195,19 @@ function HomePage() {
               <h2 style={{ fontSize: 18, marginBottom: 8, textAlign: "center" }}>
                 {product.name}
               </h2>
-              {/* Bayrak, ülke ve en ucuz fiyatı göster */}
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 4 }}>
-                {/* Eğer ülke kodu varsa bayrağı göster */}
                 {countryCode && (
                   <ReactCountryFlag
                     countryCode={countryCode}
-                    svg // SVG formatını kullan
+                    svg
                     style={{
-                      width: '1.5em', // Boyut ayarı
+                      width: '1.5em',
                       height: '1.5em',
                     }}
-                    title={cheapestPrice.country} // Fare üzerine gelince ülke adını göster
+                    title={cheapestPrice.country}
                   />
                 )}
-                {/* Ülke adını göster */}
                 <span style={{ fontSize: 14, opacity: 0.9 }}>{cheapestPrice.country}</span>
-                {/* En ucuz fiyatı ve para birimini göster */}
                 <p style={{ fontSize: 16, fontWeight: 'bold', color: '#ffdb08', margin: 0 }}>
                   {convertPrice(cheapestPrice.price_usd)} {selectedCurrency}
                 </p>
@@ -195,7 +217,6 @@ function HomePage() {
         })}
       </div>
 
-      {/* Footer bileşeni kullanıldı */}
       <Footer />
     </div>
   );
