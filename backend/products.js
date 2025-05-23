@@ -212,6 +212,5 @@ const products = [
   },
 ];
 
-// export default products; // Bu satırı silin veya yorum satırı yapın
 module.exports = products; // Bu satırı kullanın
 // This is a list of products with their prices in different countries.

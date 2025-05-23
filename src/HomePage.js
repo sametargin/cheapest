@@ -24,14 +24,26 @@ function HomePage() {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        // Tam URL kullanıldığından emin olun
-        const response = await axios.get('http://localhost:3001/api/products');
-        setProducts(response.data);
-        setError(null);
+        const baseURL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+        const response = await axios.get(`${baseURL}/api/products`, {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          timeout: 5000
+        });
+        if (response.data) {
+          setProducts(response.data);
+          setError(null);
+        } else {
+          throw new Error('No data received');
+        }
       } catch (err) {
-        setError("Failed to fetch products.");
-        setProducts([]);
         console.error("Error fetching products:", err);
+        setError(err.message === 'No data received' ? 
+          "No products found." : 
+          "Failed to fetch products. Please try again later.");
+        setProducts([]);
       } finally {
         setLoading(false);
       }
