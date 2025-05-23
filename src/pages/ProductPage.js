@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react"; // useState import edildi
 import { useParams, Link } from "react-router-dom";
-import products from "../products"; // Import yolu düzeltildi
-import logo from "../logoCHPST.png"; // Import yolu düzeltildi
-import { useCurrency } from '../context/CurrencyContext'; // Import yolu düzeltildi
+import products from "../products";
+import logo from "../logoCHPST.png";
+import { useCurrency } from '../context/CurrencyContext';
 import { useMediaQuery } from "react-responsive";
-import Footer from '../components/Footer'; // Import yolu düzeltildi
+import Footer from '../components/Footer';
 
 function ProductPage() {
   const { id } = useParams();
@@ -13,6 +13,34 @@ function ProductPage() {
   const product = products.find((p) => p.id === id);
 
   const { selectedCurrency, setSelectedCurrency, exchangeRates, loadingRates, convertPrice } = useCurrency();
+
+  // Yorumlar için state
+  const [comments, setComments] = useState([]);
+  // Yeni yorum girişi için state
+  const [newComment, setNewComment] = useState({ nickname: '', comment: '' });
+
+  // Yorum gönderme fonksiyonu
+  const handleAddComment = (e) => {
+    e.preventDefault(); // Sayfanın yeniden yüklenmesini engelle
+
+    if (newComment.nickname.trim() === '' || newComment.comment.trim() === '') {
+      alert('Please enter both nickname and comment.');
+      return;
+    }
+
+    // Yeni yorum objesi oluştur
+    const commentToAdd = {
+      nickname: newComment.nickname,
+      comment: newComment.comment,
+      timestamp: new Date().toLocaleString() // Yorum zamanını ekle
+    };
+
+    // Yorumları state'e ekle (mevcut yorumların başına yeni yorumu ekleyelim)
+    setComments([commentToAdd, ...comments]);
+
+    // Giriş alanlarını temizle
+    setNewComment({ nickname: '', comment: '' });
+  };
 
   if (!product) {
     return (
@@ -180,6 +208,75 @@ function ProductPage() {
               </tbody>
             </table>
           </div>
+        </div>
+      </div>
+
+      {/* Yorum Bölümü */}
+      <div style={{ marginTop: 40, width: '100%' }}>
+        <h3 style={{ marginBottom: 15 }}>Comments</h3>
+
+        {/* Yorum Ekle Formu */}
+        <form onSubmit={handleAddComment} style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 20 }}>
+          <input
+            type="text"
+            placeholder="Your Nickname"
+            value={newComment.nickname}
+            onChange={(e) => setNewComment({ ...newComment, nickname: e.target.value })}
+            style={{
+              padding: '10px',
+              borderRadius: '4px',
+              border: '1px solid #555',
+              backgroundColor: '#333',
+              color: 'white',
+              fontSize: 16,
+            }}
+          />
+          <textarea
+            placeholder="Your Comment"
+            value={newComment.comment}
+            onChange={(e) => setNewComment({ ...newComment, comment: e.target.value })}
+            rows="4"
+            style={{
+              padding: '10px',
+              borderRadius: '4px',
+              border: '1px solid #555',
+              backgroundColor: '#333',
+              color: 'white',
+              fontSize: 16,
+              resize: 'vertical', // Sadece dikey yeniden boyutlandırmaya izin ver
+            }}
+          ></textarea>
+          <button
+            type="submit"
+            style={{
+              padding: '10px 20px',
+              borderRadius: '4px',
+              border: 'none',
+              backgroundColor: '#ffdb08',
+              color: '#222',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              fontSize: 16,
+              alignSelf: 'flex-start' // Sola hizala
+            }}
+          >
+            Add Comment
+          </button>
+        </form>
+
+        {/* Mevcut Yorumları Listele */}
+        <div style={{ marginTop: 20 }}>
+          {comments.length === 0 ? (
+            <p style={{ opacity: 0.8 }}>No comments yet. Be the first to comment!</p>
+          ) : (
+            comments.map((comment, index) => (
+              <div key={index} style={{ background: '#2a2a2a', borderRadius: 8, padding: 15, marginBottom: 15 }}>
+                <p style={{ margin: 0, fontWeight: 'bold', color: '#ffdb08' }}>{comment.nickname}</p>
+                <p style={{ margin: '5px 0 10px 0', opacity: 0.9 }}>{comment.comment}</p>
+                <p style={{ margin: 0, fontSize: 12, color: '#aaa' }}>{comment.timestamp}</p>
+              </div>
+            ))
+          )}
         </div>
       </div>
 
