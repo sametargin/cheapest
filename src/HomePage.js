@@ -66,11 +66,11 @@ function HomePage() {
   };
 
   if (loading) {
-    return <div style={{ color: "white", padding: 30 }}>Loading products...</div>;
+    return <div style={{ color: isDarkMode ? "white" : "#333", padding: 30 }}>Loading products...</div>;
   }
 
   if (error) {
-    return <div style={{ color: "red", padding: 30 }}>{error}</div>;
+    return <div style={{ color: "red", padding: 30, backgroundColor: isDarkMode ? "#1a1a1a" : "#ffffff" }}>{error}</div>;
   }
 
   return (
@@ -178,20 +178,21 @@ function HomePage() {
 
           const countryCode = countryCodeMap[cheapestPrice.country];
 
-          return (
-            <Link
+          return (              <Link
               to={`/product/${product.id}`}
               key={product.id}
               style={{
-                background: "#222",
+                background: isDarkMode ? "#222" : "#f5f5f5",
                 borderRadius: 12,
                 padding: 16,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 textDecoration: "none",
-                color: "white",
+                color: isDarkMode ? "white" : "#333",
                 transition: "transform 0.2s ease-in-out",
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                margin: isMobile ? '0 0 16px 0' : 0
               }}
               onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.03)"}
               onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}

@@ -16,12 +16,13 @@ function ThemeSwitch() {
         backgroundColor: isDarkMode ? '#333' : '#fff',
         border: `2px solid ${isDarkMode ? '#fff' : '#333'}`,
         borderRadius: '20px',
-        padding: '5px 10px',
+        padding: '8px 12px',
         display: 'flex',
         alignItems: 'center',
         gap: '8px',
         transition: 'all 0.3s ease',
-        zIndex: 1000
+        zIndex: 1000,
+        boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
       }}
     >
       {isDarkMode ? (
