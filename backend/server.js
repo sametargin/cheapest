@@ -30,6 +30,68 @@ app.get('/api/products/:id', (req, res) => {
   }
 });
 
+// Şehir adına göre ürün fiyatlarını döndüren endpoint
+app.get('/api/products/pricesByCity', (req, res) => {
+  const city = req.query.city;
+  const productId = req.query.productId;
+
+  if (!city || !productId) {
+    return res.status(400).send('Missing city or product ID');
+  }
+
+  // Basit bir yaklaştırma: Şehir adına göre ülkeyi bulmaya çalışalım
+  // Gerçek bir uygulamada daha gelişmiş bir coğrafi veritabanı gerekebilir
+  const countryMap = {
+    istanbul: 'Turkey',
+    ankara: 'Turkey',
+    izmir: 'Turkey',
+    newyork: 'USA',
+    'new york': 'USA',
+    berlin: 'Germany',
+    london: 'UK',
+    toronto: 'Canada',
+    sydney: 'Australia',
+    paris: 'France',
+    madrid: 'Spain',
+    rome: 'Italy',
+    tokyo: 'Japan',
+    seoul: 'South Korea',
+    mexicocity: 'Mexico',
+    'mexico city': 'Mexico',
+    amsterdam: 'Netherlands',
+    stockholm: 'Sweden',
+    oslo: 'Norway',
+    brasilia: 'Brazil',
+    mumbai: 'India',
+    delhi: 'India',
+    beijing: 'China',
+    shanghai: 'China',
+    watertown: 'USA', // Watertown, MA için ekledik
+  };
+
+  const normalizedCity = city.toLowerCase().trim();
+  const country = countryMap[normalizedCity];
+
+  if (!country) {
+    return res.status(404).send(`Country for city ${city} not found in our mapping.`);
+  }
+
+  const product = products.find(p => p.id === productId);
+
+  if (!product) {
+    return res.status(404).send('Product not found');
+  }
+
+  // İlgili ülkedeki fiyatları filtrele
+  const pricesInCountry = product.prices.filter(priceInfo => priceInfo.country === country);
+
+  if (pricesInCountry.length > 0) {
+    res.json(pricesInCountry);
+  } else {
+    res.status(404).send(`No prices found for ${product.name} in ${country}.`);
+  }
+});
+
 // Kullanıcının konumuna göre en yakın mağazayı bulan endpoint
 app.get('/api/stores/nearest', (req, res) => {
   const userLat = parseFloat(req.query.lat);

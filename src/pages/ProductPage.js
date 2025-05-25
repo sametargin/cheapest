@@ -23,16 +23,17 @@ function ProductPage() {
   const [newComment, setNewComment] = useState({ nickname: '', comment: '' });
 
   // Yeni state değişkenleri
-  const [nearestStore, setNearestStore] = useState(null);
-  const [loadingNearestStore, setLoadingNearestStore] = useState(false);
-  const [nearestStoreError, setNearestStoreError] = useState(null);
+  const [cityInput, setCityInput] = useState('');
+  const [cityPrices, setCityPrices] = useState([]);
+  const [loadingCityPrices, setLoadingCityPrices] = useState(false);
+  const [cityPricesError, setCityPricesError] = useState(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        // Tam URL kullanıldığından emin olun
-        const response = await axios.get(`http://localhost:3001/api/products/${id}`);
+        const baseURL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+        const response = await axios.get(`${baseURL}/api/products/${id}`);
         setProduct(response.data);
         setError(null);
       } catch (err) {
@@ -59,47 +60,37 @@ function ProductPage() {
     localStorage.setItem(`comments_${id}`, JSON.stringify(comments));
   }, [comments, id]);
 
-  // Konum ve en yakın mağazayı getirme useEffect'i
-  useEffect(() => {
-    const findNearestStore = async (lat, lng) => {
-      setLoadingNearestStore(true);
-      setNearestStoreError(null);
-      try {
-        const baseURL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
-        const response = await axios.get(`${baseURL}/api/stores/nearest`, {
-          params: { lat, lng, productId: id },
-          timeout: 5000
-        });
-        if (response.data) {
-          setNearestStore(response.data);
-        } else {
-          setNearestStoreError('No nearby store found for this product.');
-        }
-      } catch (err) {
-        console.error("Error fetching nearest store:", err);
-        setNearestStoreError('Failed to find nearest store.');
-      } finally {
-        setLoadingNearestStore(false);
-      }
-    };
-
-    if (navigator.geolocation) {
-      setLoadingNearestStore(true);
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          findNearestStore(position.coords.latitude, position.coords.longitude);
-        },
-        (err) => {
-          console.error("Geolocation error:", err);
-          setNearestStoreError('Could not retrieve your location.');
-          setLoadingNearestStore(false);
-        }
-      );
-    } else {
-      setNearestStoreError('Geolocation is not supported by your browser.');
+  // Şehir girildiğinde fiyatları getirme fonksiyonu
+  const fetchPricesByCity = async () => {
+    if (!cityInput.trim()) {
+      setCityPrices([]);
+      setCityPricesError(null);
+      return;
     }
 
-  }, [id]); // Ürün ID'si değiştiğinde tekrar çalıştır
+    setLoadingCityPrices(true);
+    setCityPricesError(null);
+    try {
+      const baseURL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+      // Backend'de bu endpoint'i güncelleyeceğiz veya yenisini oluşturacağız
+      const response = await axios.get(`${baseURL}/api/products/pricesByCity`, {
+        params: { city: cityInput, productId: id },
+        timeout: 5000
+      });
+      if (response.data && response.data.length > 0) {
+        setCityPrices(response.data);
+      } else {
+        setCityPrices([]);
+        setCityPricesError(`No prices found for ${cityInput}.`);
+      }
+    } catch (err) {
+      console.error("Error fetching prices by city:", err);
+      setCityPrices([]);
+      setCityPricesError('Failed to fetch prices for the entered city.');
+    } finally {
+      setLoadingCityPrices(false);
+    }
+  };
 
   const handleAddComment = (e) => {
     e.preventDefault();
@@ -304,24 +295,88 @@ function ProductPage() {
         </div>
       </div>
 
-      {/* En Yakın Mağaza Bilgisi */} 
+      {/* Şehir Bazlı Fiyat Arama */} 
       <div style={{ marginTop: 30, padding: 20, borderTop: `1px solid ${isDarkMode ? '#333' : '#ddd'}` }}>
-        <h3 style={{ marginBottom: 15, color: isDarkMode ? "white" : "#333" }}>Nearest Store</h3>
-        {loadingNearestStore && <p style={{ color: isDarkMode ? "#aaa" : "#666" }}>Finding nearest store...</p>}
-        {nearestStoreError && <p style={{ color: "red" }}>{nearestStoreError}</p>}
-        {nearestStore && (
+        <h3 style={{ marginBottom: 15, color: isDarkMode ? "white" : "#333" }}>Find Prices by City</h3>
+        <div style={{ display: 'flex', gap: 10, marginBottom: 15 }}>
+          <input
+            type="text"
+            placeholder="Enter your city (e.g., Istanbul)"
+            value={cityInput}
+            onChange={(e) => setCityInput(e.target.value)}
+            style={{
+              padding: "10px",
+              borderRadius: "4px",
+              border: `1px solid ${isDarkMode ? '#555' : '#ccc'}`,
+              backgroundColor: isDarkMode ? "#333" : "#fff",
+              color: isDarkMode ? "white" : "#333",
+              fontSize: 16,
+              flexGrow: 1
+            }}
+          />
+          <button
+            onClick={fetchPricesByCity}
+            style={{
+              padding: "10px 15px",
+              borderRadius: "4px",
+              border: 'none',
+              backgroundColor: '#ffdb08',
+              color: '#1a1a1a',
+              fontSize: 16,
+              cursor: 'pointer'
+            }}
+            disabled={loadingCityPrices}
+          >
+            {loadingCityPrices ? 'Searching...' : 'Search'}
+          </button>
+        </div>
+
+        {cityPricesError && <p style={{ color: "red" }}>{cityPricesError}</p>}
+        
+        {cityPrices.length > 0 && (
           <div>
-            <p style={{ color: isDarkMode ? "white" : "#333" }}>
-              <strong style={{ color: isDarkMode ? "#ffdb08" : "#007bff" }}>{nearestStore.name}</strong>
-            </p>
-            <p style={{ color: isDarkMode ? "white" : "#333" }}>
-              Price: <strong style={{ color: isDarkMode ? "#ffdb08" : "#28a745" }}>{convertPrice(nearestStore.productPrice)} {nearestStore.productCurrency}</strong>
-            </p>
-            {nearestStore.website && (
-              <p>
-                <a href={nearestStore.website} target="_blank" rel="noopener noreferrer" style={{ color: isDarkMode ? "#ffdb08" : "#007bff", textDecoration: 'none' }}>Visit Store Website</a>
-              </p>
-            )}
+            <h4 style={{ marginBottom: 10, color: isDarkMode ? "white" : "#333" }}>Prices in {cityInput}'s Country:</h4>
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <thead>
+                <tr>
+                  <th style={{ border: `1px solid ${isDarkMode ? '#444' : '#ddd'}`, padding: '8px', textAlign: 'left', color: isDarkMode ? "#aaa" : "#555" }}>Country</th>
+                  <th style={{ border: `1px solid ${isDarkMode ? '#444' : '#ddd'}`, padding: '8px', textAlign: 'left', color: isDarkMode ? "#aaa" : "#555" }}>Price</th>
+                  <th style={{ border: `1px solid ${isDarkMode ? '#444' : '#ddd'}`, padding: '8px', textAlign: 'left', color: isDarkMode ? "#aaa" : "#555" }}>Website</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cityPrices.map((priceInfo, index) => (
+                  <tr key={index}>
+                    <td style={{ border: `1px solid ${isDarkMode ? '#444' : '#ddd'}`, padding: '8px', color: isDarkMode ? "white" : "#333" }}>
+                      {priceInfo.country}
+                      {priceInfo.countryCode && (
+                         <ReactCountryFlag
+                          countryCode={priceInfo.countryCode}
+                          svg
+                          style={{
+                            width: '1.5em',
+                            height: '1.5em',
+                            marginLeft: '5px',
+                            verticalAlign: 'middle'
+                          }}
+                          title={priceInfo.country}
+                        />
+                      )}
+                    </td>
+                    <td style={{ border: `1px solid ${isDarkMode ? '#444' : '#ddd'}`, padding: '8px', color: isDarkMode ? "#ffdb08" : "#28a745", fontWeight: 'bold' }}>
+                      {convertPrice(priceInfo.price_usd)} {selectedCurrency} ({priceInfo.price} {priceInfo.currency})
+                    </td>
+                    <td style={{ border: `1px solid ${isDarkMode ? '#444' : '#ddd'}`, padding: '8px' }}>
+                      {priceInfo.website ? (
+                        <a href={priceInfo.website} target="_blank" rel="noopener noreferrer" style={{ color: isDarkMode ? "#ffdb08" : "#007bff", textDecoration: 'none' }}>
+                          {priceInfo.company || 'Link'}
+                        </a>
+                      ) : 'N/A'}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
       </div>
