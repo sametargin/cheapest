@@ -7,6 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import Footer from '../components/Footer';
 import axios from 'axios';
 import ReactCountryFlag from "react-country-flag";
+import { useLanguage } from '../context/LanguageContext';
 
 // Backend'deki countryMap'in bir kopyası (otomatik tamamlama için)
 const countryMap = {
@@ -41,6 +42,7 @@ function ProductPage() {
   const { id } = useParams();
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const { isDarkMode } = useTheme();
+  const { translate } = useLanguage();
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -210,7 +212,7 @@ function ProductPage() {
           }}
         >
           <img src={logo} alt="Cheapest Logo" style={{ height: isMobile ? 32 : 40 }} />
-          <span style={{ fontWeight: 700, fontSize: isMobile ? 24 : 28 }}>Cheapest</span>
+          <span style={{ fontWeight: 700, fontSize: isMobile ? 24 : 28 }}>{translate("Cheapest")}</span>
           <span
             style={{
               fontWeight: 400,
@@ -220,12 +222,12 @@ function ProductPage() {
               letterSpacing: 1,
             }}
           >
-            Global
+            {translate("Global")}
           </span>
         </Link>
         {/* Para Birimi Seçici */}
         <div style={{ textAlign: isMobile ? 'left' : 'right', width: isMobile ? '100%' : 'auto' }}>
-          <label htmlFor="currency-select" style={{ color: '#fff', marginRight: 8 }}>Para Birimi:</label>
+          <label htmlFor="currency-select" style={{ color: '#fff', marginRight: 8 }}>{translate("Para Birimi:")}</label>
           <select
             id="currency-select"
             value={selectedCurrency}
@@ -242,7 +244,7 @@ function ProductPage() {
             disabled={loadingRates}
           >
             {loadingRates ? (
-              <option>Loading...</option>
+              <option>{translate("Loading...")}</option>
             ) : (
               Object.keys(exchangeRates).map((currency) => (
                 <option key={currency} value={currency}>
@@ -297,7 +299,7 @@ function ProductPage() {
         />
         <div style={{ width: isMobile ? '100%' : 'auto' }}>
           <h1 style={{ marginBottom: 12, fontSize: isMobile ? 20 : 24 }}>{product.name}</h1>
-          <h3 style={{ fontSize: isMobile ? 16 : 18 }}>Prices by Country</h3>
+          <h3 style={{ fontSize: isMobile ? 16 : 18 }}>{translate("Prices by Country")}</h3>
           {/* Fiyat Tablosu */}
           <div style={{ overflowX: 'auto' }}>
             <table style={{
@@ -310,10 +312,10 @@ function ProductPage() {
             }}>
               <thead>
                 <tr>
-                  <th style={{ padding: 8, textAlign: 'left', border: '1px solid #444' }}>Country</th>
-                  <th style={{ padding: 8, textAlign: 'left', border: '1px solid #444' }}>Price ({selectedCurrency})</th>
-                  <th style={{ padding: 8, textAlign: 'left', border: '1px solid #444' }}>Original Price</th>
-                  <th style={{ padding: 8, textAlign: 'left', border: '1px solid #444' }}>Website</th>
+                  <th style={{ padding: 8, textAlign: 'left', border: '1px solid #444' }}>{translate("Country")}</th>
+                  <th style={{ padding: 8, textAlign: 'left', border: '1px solid #444' }}>{translate("Price")} ({selectedCurrency})</th>
+                  <th style={{ padding: 8, textAlign: 'left', border: '1px solid #444' }}>{translate("Original Price")}</th>
+                  <th style={{ padding: 8, textAlign: 'left', border: '1px solid #444' }}>{translate("Website")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -349,13 +351,13 @@ function ProductPage() {
 
       {/* Şehir Bazlı Fiyat Arama */} 
       <div style={{ marginTop: 30, padding: 20, borderTop: `1px solid ${isDarkMode ? '#333' : '#ddd'}` }}>
-        <h3 style={{ marginBottom: 15, color: isDarkMode ? "white" : "#333" }}>Find Prices by City</h3>
+        <h3 style={{ marginBottom: 15, color: isDarkMode ? "white" : "#333" }}>{translate("Find Prices by City")}</h3>
         <div style={{ position: 'relative', display: 'flex', gap: 10, marginBottom: 15 }}>
           <input
             type="text"
-            placeholder="Enter your city (e.g., Istanbul)"
+            placeholder={translate("Enter your city (e.g., Istanbul)")}
             value={cityInput}
-            onChange={handleCityInputChange} // Değişiklik burada
+            onChange={handleCityInputChange}
             style={{
               padding: "10px",
               borderRadius: "4px",
@@ -415,7 +417,7 @@ function ProductPage() {
             }}
             disabled={loadingCityPrices}
           >
-            {loadingCityPrices ? 'Searching...' : 'Search'}
+            {loadingCityPrices ? translate('Searching...') : translate('Search')}
           </button>
         </div>
 
@@ -423,13 +425,13 @@ function ProductPage() {
         
         {cityPrices.length > 0 && (
           <div>
-            <h4 style={{ marginBottom: 10, color: isDarkMode ? "white" : "#333" }}>Prices in {cityInput}'s Country:</h4>
+            <h4 style={{ marginBottom: 10, color: isDarkMode ? "white" : "#333" }}>{translate("Prices in")}</h4>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
                 <tr>
-                  <th style={{ border: `1px solid ${isDarkMode ? '#444' : '#ddd'}`, padding: '8px', textAlign: 'left', color: isDarkMode ? "#aaa" : "#555" }}>Country</th>
-                  <th style={{ border: `1px solid ${isDarkMode ? '#444' : '#ddd'}`, padding: '8px', textAlign: 'left', color: isDarkMode ? "#aaa" : "#555" }}>Price</th>
-                  <th style={{ border: `1px solid ${isDarkMode ? '#444' : '#ddd'}`, padding: '8px', textAlign: 'left', color: isDarkMode ? "#aaa" : "#555" }}>Website</th>
+                  <th style={{ border: `1px solid ${isDarkMode ? '#444' : '#ddd'}`, padding: '8px', textAlign: 'left', color: isDarkMode ? "#aaa" : "#555" }}>{translate("Country")}</th>
+                  <th style={{ border: `1px solid ${isDarkMode ? '#444' : '#ddd'}`, padding: '8px', textAlign: 'left', color: isDarkMode ? "#aaa" : "#555" }}>{translate("Price")}</th>
+                  <th style={{ border: `1px solid ${isDarkMode ? '#444' : '#ddd'}`, padding: '8px', textAlign: 'left', color: isDarkMode ? "#aaa" : "#555" }}>{translate("Website")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -471,13 +473,13 @@ function ProductPage() {
 
       {/* Yorum Bölümü */}
       <div style={{ marginTop: 40, width: '100%' }}>
-        <h3 style={{ marginBottom: 15 }}>Comments</h3>
+        <h3 style={{ marginBottom: 15 }}>{translate("Comments")}</h3>
 
         {/* Yorum Ekle Formu */}
         <form onSubmit={handleAddComment} style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 20 }}>
           <input
             type="text"
-            placeholder="Your Nickname"
+            placeholder={translate("Your Nickname")}
             value={newComment.nickname}
             onChange={(e) => setNewComment({ ...newComment, nickname: e.target.value })}
             style={{
@@ -490,7 +492,7 @@ function ProductPage() {
             }}
           />
           <textarea
-            placeholder="Your Comment"
+            placeholder={translate("Your Comment")}
             value={newComment.comment}
             onChange={(e) => setNewComment({ ...newComment, comment: e.target.value })}
             rows="4"
@@ -518,14 +520,14 @@ function ProductPage() {
               alignSelf: 'flex-start'
             }}
           >
-            Add Comment
+            {translate("Add Comment")}
           </button>
         </form>
 
         {/* Mevcut Yorumları Listele */}
         <div style={{ marginTop: 20 }}>
           {comments.length === 0 ? (
-            <p style={{ opacity: 0.8 }}>No comments yet. Be the first to comment!</p>
+            <p style={{ opacity: 0.8 }}>{translate("No comments yet. Be the first to comment!")}</p>
           ) : (
             comments.map((comment, index) => (
               <div key={index} style={{ background: '#2a2a2a', borderRadius: 8, padding: 15, marginBottom: 15 }}>
