@@ -22,6 +22,11 @@ function ProductPage() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState({ nickname: '', comment: '' });
 
+  // Yeni state değişkenleri
+  const [nearestStore, setNearestStore] = useState(null);
+  const [loadingNearestStore, setLoadingNearestStore] = useState(false);
+  const [nearestStoreError, setNearestStoreError] = useState(null);
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -54,6 +59,47 @@ function ProductPage() {
     localStorage.setItem(`comments_${id}`, JSON.stringify(comments));
   }, [comments, id]);
 
+  // Konum ve en yakın mağazayı getirme useEffect'i
+  useEffect(() => {
+    const findNearestStore = async (lat, lng) => {
+      setLoadingNearestStore(true);
+      setNearestStoreError(null);
+      try {
+        const baseURL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+        const response = await axios.get(`${baseURL}/api/stores/nearest`, {
+          params: { lat, lng, productId: id },
+          timeout: 5000
+        });
+        if (response.data) {
+          setNearestStore(response.data);
+        } else {
+          setNearestStoreError('No nearby store found for this product.');
+        }
+      } catch (err) {
+        console.error("Error fetching nearest store:", err);
+        setNearestStoreError('Failed to find nearest store.');
+      } finally {
+        setLoadingNearestStore(false);
+      }
+    };
+
+    if (navigator.geolocation) {
+      setLoadingNearestStore(true);
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          findNearestStore(position.coords.latitude, position.coords.longitude);
+        },
+        (err) => {
+          console.error("Geolocation error:", err);
+          setNearestStoreError('Could not retrieve your location.');
+          setLoadingNearestStore(false);
+        }
+      );
+    } else {
+      setNearestStoreError('Geolocation is not supported by your browser.');
+    }
+
+  }, [id]); // Ürün ID'si değiştiğinde tekrar çalıştır
 
   const handleAddComment = (e) => {
     e.preventDefault();
@@ -75,16 +121,16 @@ function ProductPage() {
   };
 
   if (loading) {
-    return <div style={{ color: "white", padding: 30 }}>Loading product...</div>;
+    return <div style={{ color: isDarkMode ? "white" : "#333", padding: 30 }}>Loading product...</div>;
   }
 
   if (error) {
-    return <div style={{ color: "red", padding: 30 }}>{error}</div>;
+    return <div style={{ color: "red", padding: 30, backgroundColor: isDarkMode ? "#1a1a1a" : "#ffffff" }}>{error}</div>;
   }
 
   if (!product) {
     return (
-      <div style={{ color: "white", padding: 30 }}>
+      <div style={{ color: isDarkMode ? "white" : "#333", padding: 30 }}>
         <h2>Product not found</h2>
         <Link to="/" style={{ color: "#ffdb08" }}>Back to Home</Link>
       </div>
@@ -98,7 +144,7 @@ function ProductPage() {
       backgroundColor: isDarkMode ? "#1a1a1a" : "#ffffff",
       minHeight: '100vh', 
       display: 'flex', 
-      flexDirection: 'column' 
+      flexDirection: 'column'
     }}>
       {/* Başlık ve Para Birimi Seçici */}
       <div style={{
@@ -256,6 +302,28 @@ function ProductPage() {
             </table>
           </div>
         </div>
+      </div>
+
+      {/* En Yakın Mağaza Bilgisi */} 
+      <div style={{ marginTop: 30, padding: 20, borderTop: `1px solid ${isDarkMode ? '#333' : '#ddd'}` }}>
+        <h3 style={{ marginBottom: 15, color: isDarkMode ? "white" : "#333" }}>Nearest Store</h3>
+        {loadingNearestStore && <p style={{ color: isDarkMode ? "#aaa" : "#666" }}>Finding nearest store...</p>}
+        {nearestStoreError && <p style={{ color: "red" }}>{nearestStoreError}</p>}
+        {nearestStore && (
+          <div>
+            <p style={{ color: isDarkMode ? "white" : "#333" }}>
+              <strong style={{ color: isDarkMode ? "#ffdb08" : "#007bff" }}>{nearestStore.name}</strong>
+            </p>
+            <p style={{ color: isDarkMode ? "white" : "#333" }}>
+              Price: <strong style={{ color: isDarkMode ? "#ffdb08" : "#28a745" }}>{convertPrice(nearestStore.productPrice)} {nearestStore.productCurrency}</strong>
+            </p>
+            {nearestStore.website && (
+              <p>
+                <a href={nearestStore.website} target="_blank" rel="noopener noreferrer" style={{ color: isDarkMode ? "#ffdb08" : "#007bff", textDecoration: 'none' }}>Visit Store Website</a>
+              </p>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Yorum Bölümü */}
