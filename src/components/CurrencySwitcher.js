@@ -24,8 +24,9 @@ function CurrencySwitcher() {
   return (
     <div style={{
       display: 'flex',
-      alignItems: 'center',
-      gap: 8,
+      flexDirection: 'column',  // changed from row to column
+      alignItems: 'center',     // center horizontally
+      gap: 4,                   // smaller vertical gap
       padding: '8px 12px',
       borderRadius: 20,
       backgroundColor: isDarkMode ? '#333' : '#fff',

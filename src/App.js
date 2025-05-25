@@ -7,8 +7,8 @@ import AboutPage from "./pages/AboutPage";
 import { CurrencyProvider } from "./context/CurrencyContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import { LanguageProvider } from "./context/LanguageContext";
-import ThemeSwitch from "./components/ThemeSwitch";
 import LanguageSwitcher from "./components/LanguageSwitcher";
+import ThemeSwitch from "./components/ThemeSwitch";
 import CurrencySwitcher from "./components/CurrencySwitcher";
 
 function App() {
@@ -17,10 +17,10 @@ function App() {
       <ThemeProvider>
         <LanguageProvider>
           <CurrencyProvider>
-            <div style={{ position: 'fixed', top: 20, right: 20, display: 'flex', gap: 12, zIndex: 1000 }}>
-              <LanguageSwitcher />
-              <ThemeSwitch />
-              <CurrencySwitcher />
+            <div style={{ position: 'fixed', top: 20, right: 20, display: 'flex', gap: 12, zIndex: 1000, flexDirection: 'column', alignItems: 'center' }}>
+              <LanguageSwitcher style={{ position: 'static', top: 'auto', right: 'auto' }} />
+              <ThemeSwitch style={{ position: 'static', top: 'auto', right: 'auto' }} />
+              <CurrencySwitcher style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }} />
             </div>
             <div className="App" style={{ minHeight: "100vh" }}>
               <Routes>
