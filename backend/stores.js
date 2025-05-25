@@ -26,6 +26,18 @@ const stores = [
       { productId: "instapot", price: 3600, currency: "TRY" },
     ],
   },
+  {
+    id: "store-usa-ma-watertown",
+    name: "Best Buy - Watertown, MA",
+    location: { lat: 42.3638, lng: -71.1800 }, // Yaklaşık Watertown, MA koordinatları
+    products: [
+      { productId: "ps5", price: 499, currency: "USD" }, // PS5 fiyatı
+      { productId: "macbook", price: 1099, currency: "USD" }, // MacBook Air M2 fiyatı
+      { productId: "echo", price: 49.99, currency: "USD" }, // Amazon Echo Dot fiyatı
+      { productId: "dyson", price: 749, currency: "USD" }, // Dyson V15 fiyatı
+      { productId: "instapot", price: 89, currency: "USD" }, // Instant Pot fiyatı
+    ],
+  },
   // Daha fazla mağaza eklenebilir
 ];
 
