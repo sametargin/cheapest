@@ -8,6 +8,35 @@ import Footer from '../components/Footer';
 import axios from 'axios';
 import ReactCountryFlag from "react-country-flag";
 
+// Backend'deki countryMap'in bir kopyası (otomatik tamamlama için)
+const countryMap = {
+  istanbul: 'Turkey',
+  ankara: 'Turkey',
+  izmir: 'Turkey',
+  newyork: 'USA',
+  'new york': 'USA',
+  berlin: 'Germany',
+  london: 'UK',
+  toronto: 'Canada',
+  sydney: 'Australia',
+  paris: 'France',
+  madrid: 'Spain',
+  rome: 'Italy',
+  tokyo: 'Japan',
+  seoul: 'South Korea',
+  mexicocity: 'Mexico',
+  'mexico city': 'Mexico',
+  amsterdam: 'Netherlands',
+  stockholm: 'Sweden',
+  oslo: 'Norway',
+  brasilia: 'Brazil',
+  mumbai: 'India',
+  delhi: 'India',
+  beijing: 'China',
+  shanghai: 'China',
+  watertown: 'USA', // Watertown, MA için ekledik
+};
+
 function ProductPage() {
   const { id } = useParams();
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -27,6 +56,7 @@ function ProductPage() {
   const [cityPrices, setCityPrices] = useState([]);
   const [loadingCityPrices, setLoadingCityPrices] = useState(false);
   const [cityPricesError, setCityPricesError] = useState(null);
+  const [suggestions, setSuggestions] = useState([]); // Otomatik tamamlama önerileri için state
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -90,6 +120,28 @@ function ProductPage() {
     } finally {
       setLoadingCityPrices(false);
     }
+  };
+
+  // Input değiştikçe önerileri güncelleme
+  const handleCityInputChange = (e) => {
+    const value = e.target.value;
+    setCityInput(value);
+
+    if (value.length > 0) {
+      const filteredSuggestions = Object.keys(countryMap).filter(city =>
+        city.toLowerCase().startsWith(value.toLowerCase())
+      );
+      setSuggestions(filteredSuggestions);
+    } else {
+      setSuggestions([]);
+    }
+  };
+
+  // Öneriye tıklanınca inputu doldur ve önerileri temizle
+  const handleSuggestionClick = (suggestion) => {
+    setCityInput(suggestion);
+    setSuggestions([]);
+    // İsteği otomatik olarak göndermek isterseniz burada fetchPricesByCity() çağırabilirsiniz
   };
 
   const handleAddComment = (e) => {
@@ -298,12 +350,12 @@ function ProductPage() {
       {/* Şehir Bazlı Fiyat Arama */} 
       <div style={{ marginTop: 30, padding: 20, borderTop: `1px solid ${isDarkMode ? '#333' : '#ddd'}` }}>
         <h3 style={{ marginBottom: 15, color: isDarkMode ? "white" : "#333" }}>Find Prices by City</h3>
-        <div style={{ display: 'flex', gap: 10, marginBottom: 15 }}>
+        <div style={{ position: 'relative', display: 'flex', gap: 10, marginBottom: 15 }}>
           <input
             type="text"
             placeholder="Enter your city (e.g., Istanbul)"
             value={cityInput}
-            onChange={(e) => setCityInput(e.target.value)}
+            onChange={handleCityInputChange} // Değişiklik burada
             style={{
               padding: "10px",
               borderRadius: "4px",
@@ -314,6 +366,42 @@ function ProductPage() {
               flexGrow: 1
             }}
           />
+          {/* Otomatik tamamlama önerileri */} 
+          {suggestions.length > 0 && (
+            <ul style={{
+              position: 'absolute',
+              top: '100%',
+              left: 0,
+              right: 0,
+              backgroundColor: isDarkMode ? '#333' : '#fff',
+              border: `1px solid ${isDarkMode ? '#555' : '#ccc'}`,
+              borderRadius: '4px',
+              listStyle: 'none',
+              padding: 0,
+              margin: '5px 0 0 0',
+              zIndex: 10,
+              maxHeight: '150px',
+              overflowY: 'auto'
+            }}>
+              {suggestions.map((suggestion, index) => (
+                <li
+                  key={index}
+                  onClick={() => handleSuggestionClick(suggestion)}
+                  style={{
+                    padding: '10px',
+                    cursor: 'pointer',
+                    borderBottom: `1px solid ${isDarkMode ? '#444' : '#eee'}`,
+                    color: isDarkMode ? 'white' : '#333',
+                    '&:hover': {
+                      backgroundColor: isDarkMode ? '#555' : '#f0f0f0',
+                    }
+                  }}
+                >
+                  {suggestion}
+                </li>
+              ))}
+            </ul>
+          )}
           <button
             onClick={fetchPricesByCity}
             style={{
