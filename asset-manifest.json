@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/cheapest/static/css/main.47b4dff2.css",
-    "main.js": "/cheapest/static/js/main.7be20d74.js",
+    "main.js": "/cheapest/static/js/main.1530c5fa.js",
     "static/js/453.5a82b0d9.chunk.js": "/cheapest/static/js/453.5a82b0d9.chunk.js",
     "static/media/logoCHPST.png": "/cheapest/static/media/logoCHPST.063a6df71de77e078c2e.png",
     "index.html": "/cheapest/index.html",
     "main.47b4dff2.css.map": "/cheapest/static/css/main.47b4dff2.css.map",
-    "main.7be20d74.js.map": "/cheapest/static/js/main.7be20d74.js.map",
+    "main.1530c5fa.js.map": "/cheapest/static/js/main.1530c5fa.js.map",
     "453.5a82b0d9.chunk.js.map": "/cheapest/static/js/453.5a82b0d9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.47b4dff2.css",
-    "static/js/main.7be20d74.js"
+    "static/js/main.1530c5fa.js"
   ]
 }
