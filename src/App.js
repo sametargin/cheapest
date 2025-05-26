@@ -17,7 +17,7 @@ function App() {
       <ThemeProvider>
         <LanguageProvider>
           <CurrencyProvider>
-            <div style={{ position: 'fixed', top: 20, right: 20, display: 'flex', flexDirection: 'row', gap: 5, zIndex: 1000, alignItems: 'center' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: 5, zIndex: 1000, alignItems: 'center' }}>
               <CurrencySwitcher />
               <LanguageSwitcher />
               <ThemeSwitch />
