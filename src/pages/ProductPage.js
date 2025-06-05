@@ -389,14 +389,13 @@ function ProductPage() {
                 <li
                   key={index}
                   onClick={() => handleSuggestionClick(suggestion)}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = isDarkMode ? '#555' : '#f0f0f0'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                   style={{
                     padding: '10px',
                     cursor: 'pointer',
                     borderBottom: `1px solid ${isDarkMode ? '#444' : '#eee'}`,
-                    color: isDarkMode ? 'white' : '#333',
-                    '&:hover': {
-                      backgroundColor: isDarkMode ? '#555' : '#f0f0f0',
-                    }
+                    color: isDarkMode ? 'white' : '#333'
                   }}
                 >
                   {suggestion}
